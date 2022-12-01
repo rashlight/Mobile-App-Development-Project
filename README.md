@@ -1,3 +1,3 @@
-# Mobile Application Development - UCook
+# Mobile Application Development - UFood
 
 Created by group X

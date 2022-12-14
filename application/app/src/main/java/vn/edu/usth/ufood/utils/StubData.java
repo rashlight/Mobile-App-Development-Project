@@ -2,10 +2,13 @@ package vn.edu.usth.ufood.utils;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Picture;
 import android.media.Image;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
 
 import java.lang.reflect.Array;
 import java.time.Duration;
@@ -72,8 +75,11 @@ public class StubData {
         protected long price;
         protected float rating;
         protected ArrayList<Item> extras;
+        protected ArrayList<Comment> comments;
 
-        public Item(String id, String name, Duration prepTime, String imageLink, long price, float rating, ArrayList<Item> extras) {
+
+
+        public Item(String id, String name, Duration prepTime, String imageLink, long price, float rating, ArrayList<Item> extras, ArrayList<Comment> comments) {
             this.id = id;
             this.name = name;
             this.prepTime = prepTime;
@@ -81,6 +87,7 @@ public class StubData {
             this.price = price;
             setRating(rating);
             this.extras = extras;
+            this.comments = comments;
         }
 
         public String getId() {
@@ -139,12 +146,52 @@ public class StubData {
         public void setExtras(ArrayList<Item> extras) {
             this.extras = extras;
         }
+
+        public ArrayList<Comment> getComments() {
+            return comments;
+        }
+
+        public void setComments(ArrayList<Comment> comments) {
+            this.comments = comments;
+        }
+
     }
 
     public static class Comment {
+
         protected User user;
         protected Date postDate;
         protected String content;
+
+        public Comment(User user, Date postDate, String content) {
+            this.user = user;
+            this.postDate = postDate;
+            this.content = content;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+        public Date getPostDate() {
+            return postDate;
+        }
+
+        public void setPostDate(Date postDate) {
+            this.postDate = postDate;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
     }
 
     public static ArrayList<String> getItemNames(ArrayList<Item> items) {
@@ -209,7 +256,20 @@ public class StubData {
                     "https://images.pexels.com/photos/53468/dessert-orange-food-chocolate-53468.jpeg?h=350&auto=compress&cs=tinysrgb",
                     25000,
                     3,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Hi","https://picsum.photos/200"),
+                                    new Date(2022,1,3),
+                                    "The cake is really delicious"
+                            ),
+                            new Comment(
+                                    new User("Roma","https://picsum.photos/200"),
+                                    new Date(2022,4,21),
+                                    "Good price, mediocre food"
+                            )
+                        )
+                    )
             ),
             new Item(
                     "semiretired_tiramisu",
@@ -218,7 +278,20 @@ public class StubData {
                     "https://images.pexels.com/photos/159887/pexels-photo-159887.jpeg?h=350&auto=compress",
                     85000,
                     4,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Ben","https://picsum.photos/200"),
+                                    new Date(2022,10,6),
+                                    "Quite expensive, but good taste"
+                            ),
+                            new Comment(
+                                    new User("Simon","https://picsum.photos/200"),
+                                    new Date(2022,4,16),
+                                    "Avoid taking this!"
+                            )
+                        )
+                    )
             ),
             new Item(
                     "marble_cake",
@@ -226,8 +299,16 @@ public class StubData {
                     Duration.ofSeconds(240),
                     "https://images.pexels.com/photos/136745/pexels-photo-136745.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                     30000,
-                    3,
-                    new ArrayList<>()
+                    5,
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Jack","https://picsum.photos/200"),
+                                    new Date(2022,9,6),
+                                    "The best underpriced cake"
+                            )
+                        )
+                    )
             ),
             new Item(
                     "rainbow_cake",
@@ -236,7 +317,8 @@ public class StubData {
                     "https://images.pexels.com/photos/39355/dessert-raspberry-leaf-almond-39355.jpeg?h=350&auto=compress&cs=tinysrgb",
                     10000,
                     2.5f,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList())
             ),
             new Item(
                     "rice_pudding",
@@ -245,7 +327,25 @@ public class StubData {
                     "https://images.pexels.com/photos/239578/pexels-photo-239578.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                     40000,
                     5,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Lily","https://picsum.photos/200"),
+                                    new Date(2021,12,12),
+                                    "Good price!"
+                            ),
+                            new Comment(
+                                    new User("Dan","https://picsum.photos/200"),
+                                    new Date(2022,7,15),
+                                    "Can't ask any better price"
+                            ),
+                            new Comment(
+                                    new User("Kevin","https://picsum.photos/200"),
+                                    new Date(2022,2,19),
+                                    "Too little"
+                            )
+                        )
+                    )
             ),
             new Item(
                     "ice_cream",
@@ -254,7 +354,15 @@ public class StubData {
                     "https://images.pexels.com/photos/8382/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb",
                     30000,
                     3.5f,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Kevin","https://picsum.photos/200"),
+                                    new Date(),
+                                    ""
+                            )
+                        )
+                    )
             ),
             new Item(
                     "strawberry_cake",
@@ -263,7 +371,20 @@ public class StubData {
                     "https://images.pexels.com/photos/51186/pexels-photo-51186.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                     10000000,
                     5,
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(
+                            new Comment(
+                                    new User("Elen","https://picsum.photos/200"),
+                                    new Date(2022,9,26),
+                                    "Premium price, luxury taste"
+                            ),
+                            new Comment(
+                                    new User("Armstrong","https://picsum.photos/200"),
+                                    new Date(2022,8,8),
+                                    "Really big but the price seems off"
+                            )
+                        )
+                    )
             ),
             new Item(
                     "cupcake_fruit",
@@ -272,8 +393,9 @@ public class StubData {
                     "https://images.pexels.com/photos/55809/dessert-strawberry-tart-berry-55809.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
                     2500,
                     1,
-                    new ArrayList<>()
-            )));
-
-
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList())
+                )
+            )
+        );
 }

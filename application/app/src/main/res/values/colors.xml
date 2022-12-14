@@ -6,4 +6,7 @@
     <color name="colorTextGrey">#8E939E</color>
     <color name="colorPinkDark">#A8213A</color>
     <color name="colorWhiteTrans">#E6FFFFFF</color>
+    <color name="colorWhiteTrue">#FFFFFFFF</color>
+    <color name="colorBlackTrans">#E6000000</color>
+    <color name="colorBlackTrue">#FF000000</color>
 </resources>

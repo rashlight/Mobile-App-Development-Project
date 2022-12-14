@@ -11,9 +11,9 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ratingBar"
         android:layout_alignStart="@id/ratingBar"
-        android:text="LAURA MAGNAGO"
+        android:layout_marginStart="3dp"
+        android:text="USERNAME"
         android:textColor="@color/colorTextDark"
         android:textSize="16sp"
         android:textAppearance="@style/SemiBold"/>
@@ -21,9 +21,10 @@
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_username"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/space16"
-        android:layout_marginBottom="@dimen/space8"
+        android:layout_marginTop="@dimen/space4"
         android:rating="3.5"
         android:numStars="5"
         android:isIndicator="true"
@@ -45,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/space8"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_username"
+        android:layout_below="@id/ratingBar"
         android:layout_alignStart="@id/ratingBar"
         style="@style/Text14Reg"/>
     <LinearLayout

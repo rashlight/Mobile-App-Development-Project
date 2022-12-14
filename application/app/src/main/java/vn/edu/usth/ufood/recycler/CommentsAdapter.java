@@ -61,7 +61,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.MyView
 
         Glide.with(context)
                 .load(Uri.parse(itemComment.getUserphoto()))
-                .transform(new CircleGlide(context))
+                .transform(new CircleGlide())
                 .into(holder.userphoto);
         Glide.with(context)
                 .load(Uri.parse(itemComment.getImg1()))

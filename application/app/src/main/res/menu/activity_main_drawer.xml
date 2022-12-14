@@ -3,17 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/new_recipe"
-            android:title="NEW RECIPE" />
-        <item
-            android:id="@+id/recipes"
-            android:title="RECIPES" />
-        <item
             android:id="@+id/saved"
-            android:title="SAVED RECIPES" />
+            android:title="CART" />
         <item
             android:id="@+id/shop_list"
-            android:title="SHOPPING LIST" />
+            android:title="HISTORY" />
+        <item
+            android:id="@+id/profile"
+            android:title="PROFILE" />
         <item
             android:id="@+id/setting"
             android:title="SETTINGS" />

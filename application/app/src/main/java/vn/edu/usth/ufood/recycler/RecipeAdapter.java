@@ -23,7 +23,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     private boolean active;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView recipe, time;
+        public TextView recipe, price;
         public RatingBar ratingBar;
         public ImageView imageView;
 
@@ -31,12 +31,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
             super(view);
 
             recipe = (TextView) view.findViewById(R.id.tv_recipe_name);
-            time = (TextView) view.findViewById(R.id.tv_time);
+            price = (TextView) view.findViewById(R.id.tv_price);
             ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
             imageView = (ImageView) view.findViewById(R.id.iv_recipe);
         }
-
-
     }
 
 
@@ -57,11 +55,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ItemRecipe itemRecipe = items.get(position);
         holder.recipe.setText(itemRecipe.getRecipe());
-        holder.time.setText(itemRecipe.getTime());
+        holder.price.setText(itemRecipe.getPrice());
         holder.ratingBar.setRating(itemRecipe.getRating());
         Glide.with(context)
                 .load(Uri.parse(itemRecipe.getImg()))
-                .transform(new CircleGlide(context))
+                .transform(new CircleGlide())
                 .into(holder.imageView);
     }
 

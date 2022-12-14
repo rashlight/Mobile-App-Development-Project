@@ -70,7 +70,7 @@ public class Detail extends BaseActivity {
         final ImageView imageComment = (ImageView) findViewById(R.id.iv_user);
         Glide.with(this)
                 .load(Uri.parse("https://randomuser.me/api/portraits/women/75.jpg"))
-                .transform(new CircleGlide(this))
+                .transform(new CircleGlide())
                 .into(imageComment);
 
         final ImageView image = (ImageView) findViewById(R.id.image);
@@ -90,20 +90,6 @@ public class Detail extends BaseActivity {
         return true;
     }
 
-    public List<ItemShopping> generateShopping(){
-        List<ItemShopping> itemList = new ArrayList<>();
-        String name[] = {"butter", "brown", "eggs", "flour", "baking powder", "of salt", "buttermilk", "orange juice"};
-        String pieces[] = {"200g", "200g", "4", "300g", "2tsp", "1 pinch", "100ml", "50ml"};
-        float rating[] = {3, 4, 4, 3, 5, 4, 4, 3};
-
-        for (int i = 0; i<name.length; i++){
-            ItemShopping item = new ItemShopping();
-            item.setPieces(pieces[i]);
-            item.setName(name[i]);
-            itemList.add(item);
-        }
-        return itemList;
-    }
     public List<ItemComment> generateComments(){
         List<ItemComment> itemList = new ArrayList<>();
         String username[] = {"LAURA MAGNAGO"};
@@ -113,7 +99,7 @@ public class Detail extends BaseActivity {
         String img1[] = {"https://images.pexels.com/photos/8382/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb"};
         String img2[] = {"https://images.pexels.com/photos/134574/pexels-photo-134574.jpeg?h=350&auto=compress&cs=tinysrgb"};
 
-        for (int i = 0; i<username.length; i++){
+        for (int i = 0; i < username.length; i++){
             ItemComment comment = new ItemComment();
             comment.setUsername(username[i]);
             comment.setUserphoto(userphoto[i]);
@@ -126,20 +112,5 @@ public class Detail extends BaseActivity {
         return itemList;
     }
 
-    public List<ItemPreparation> generatePreparation(){
-        List<ItemPreparation> itemList = new ArrayList<>();
-        String step[] = {"In a medium saucepan, whisk together egg yolks and sugar until well blended. Whisk in milk and cook over medium heat, stirring constantly, until mixture boils. Boil gently for 1 minute, remove from heat and allow to cool slightly. Cover tightly and chill in refrigerator 1 hour.",
-                "In a medium bowl, beat cream with vanilla until stiff peaks form. Whisk mascarpone into yolk mixture until smooth.",
-                "In a small bowl, combine coffee and rum. Split ladyfingers in half lengthwise and drizzle with coffee mixture.",
-                "Arrange half of soaked ladyfingers in bottom of a 7x11 inch dish. Spread half of mascarpone mixture over ladyfingers, then half of whipped cream over that. Repeat layers and sprinkle with cocoa. Cover and refrigerate 4 to 6 hours, until set."};
-
-        for (int i = 0; i<step.length; i++){
-            ItemPreparation item = new ItemPreparation();
-            item.setStep(step[i]);
-            item.setNumber(String.valueOf(i+1));
-            itemList.add(item);
-        }
-        return itemList;
-    }
 }
 

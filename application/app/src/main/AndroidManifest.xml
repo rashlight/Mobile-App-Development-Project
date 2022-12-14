@@ -11,13 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Splash"
             android:exported="true"
             android:theme="@style/Full">
@@ -39,6 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="vn.edu.usth.ufood.Main" />
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -24,7 +24,9 @@ import vn.edu.usth.ufood.utils.CustomTypefaceSpan;
 
 public class Main extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    DrawerLayout drawer;
+
+    private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class Main extends BaseActivity
         ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
         Glide.with(this)
                 .load(Uri.parse("https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"))
-                .transform(new CircleGlide(this))
+                .transform(new CircleGlide())
                 .into(imageView);
     }
     private void applyFontToMenuItem(MenuItem mi) {
@@ -106,11 +108,7 @@ public class Main extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.new_recipe) {
-            // Handle the camera action
-        } else if (id == R.id.recipes) {
-
-        } else if (id == R.id.saved) {
+        if (id == R.id.saved) {
 
         } else if (id == R.id.shop_list) {
 

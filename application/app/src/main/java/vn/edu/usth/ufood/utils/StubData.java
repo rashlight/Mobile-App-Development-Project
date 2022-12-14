@@ -357,9 +357,9 @@ public class StubData {
                     new ArrayList<>(),
                     new ArrayList<>(Arrays.asList(
                             new Comment(
-                                    new User("Kevin","https://picsum.photos/200"),
-                                    new Date(),
-                                    ""
+                                    new User("Banzai","https://picsum.photos/200"),
+                                    new Date(2022,12,1),
+                                    "Fair price"
                             )
                         )
                     )

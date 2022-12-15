@@ -1,24 +1,10 @@
 package vn.edu.usth.ufood.utils;
 
-import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.Picture;
-import android.media.Image;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.bumptech.glide.Glide;
-
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
-import vn.edu.usth.ufood.R;
 
 public class StubData {
     public static class User {
@@ -77,8 +63,6 @@ public class StubData {
         protected ArrayList<Item> extras;
         protected ArrayList<Comment> comments;
 
-
-
         public Item(String id, String name, Duration prepTime, String imageLink, long price, float rating, ArrayList<Item> extras, ArrayList<Comment> comments) {
             this.id = id;
             this.name = name;
@@ -136,6 +120,7 @@ public class StubData {
 
         public void setRating(float rating) {
             if (rating < 0.0 || rating > 5.0) throw new IndexOutOfBoundsException("Invalid rating");
+            getCommentRating(calculateRatingAvg());
             this.rating = rating;
         }
 
@@ -157,16 +142,18 @@ public class StubData {
 
     }
 
+    // Comment
     public static class Comment {
-
         protected User user;
         protected Date postDate;
         protected String content;
+        protected float rating;
 
-        public Comment(User user, Date postDate, String content) {
+        public Comment(User user, Date postDate, String content, float rating) {
             this.user = user;
             this.postDate = postDate;
             this.content = content;
+            this.rating = rating;
         }
 
         public User getUser() {
@@ -192,6 +179,23 @@ public class StubData {
         public void setContent(String content) {
             this.content = content;
         }
+
+        public float getRating() {
+            return rating;
+        }
+
+        public void setRating(float rating) {
+            this.rating = rating;
+        }
+    }
+
+    public static float calculateRatingAvg(Item item) {
+        float total = 0f;
+        for (Comment comment : item.comments) {
+            total += comment.rating;
+        }
+        float avg = (float) total / item.comments.size();
+        return avg;
     }
 
     public static ArrayList<String> getItemNames(ArrayList<Item> items) {
@@ -199,7 +203,6 @@ public class StubData {
         for (Item item : items) {
             result.add(item.name);
         }
-
         return result;
     }
 
@@ -238,9 +241,18 @@ public class StubData {
         for (Item item : items) {
             result.add(item.rating);
         }
-
         return result;
     }
+
+    public static float getItemComment(ArrayList<ArrayList<Comment>> rate) {
+        ArrayList<ArrayList> result = new ArrayList<>();
+        for (ArrayList<Comment> r : rate) {
+            result.add(r.);
+        }
+        return result;
+    }
+
+
 
     public static User StubUser = new User(
             "Son Tran Giang",
@@ -261,12 +273,14 @@ public class StubData {
                             new Comment(
                                     new User("Hi","https://picsum.photos/200"),
                                     new Date(2022,1,3),
-                                    "The cake is really delicious"
+                                    "The cake is really delicious",
+                                    3.5f
                             ),
                             new Comment(
                                     new User("Roma","https://picsum.photos/200"),
                                     new Date(2022,4,21),
-                                    "Good price, mediocre food"
+                                    "Good price, mediocre food",
+                                    1.5f
                             )
                         )
                     )
@@ -283,12 +297,14 @@ public class StubData {
                             new Comment(
                                     new User("Ben","https://picsum.photos/200"),
                                     new Date(2022,10,6),
-                                    "Quite expensive, but good taste"
+                                    "Quite expensive, but good taste",
+                                    4.5f
                             ),
                             new Comment(
                                     new User("Simon","https://picsum.photos/200"),
                                     new Date(2022,4,16),
-                                    "Avoid taking this!"
+                                    "Avoid taking this!",
+                                    3f
                             )
                         )
                     )
@@ -305,7 +321,8 @@ public class StubData {
                             new Comment(
                                     new User("Jack","https://picsum.photos/200"),
                                     new Date(2022,9,6),
-                                    "The best underpriced cake"
+                                    "The best underpriced cake",
+                                    5f
                             )
                         )
                     )
@@ -332,17 +349,20 @@ public class StubData {
                             new Comment(
                                     new User("Lily","https://picsum.photos/200"),
                                     new Date(2021,12,12),
-                                    "Good price!"
+                                    "Good price!",
+                                    4f
                             ),
                             new Comment(
                                     new User("Dan","https://picsum.photos/200"),
                                     new Date(2022,7,15),
-                                    "Can't ask any better price"
+                                    "Can't ask any better price",
+                                    4.5f
                             ),
                             new Comment(
                                     new User("Kevin","https://picsum.photos/200"),
                                     new Date(2022,2,19),
-                                    "Too little"
+                                    "Too little",
+                                    4f
                             )
                         )
                     )
@@ -359,7 +379,8 @@ public class StubData {
                             new Comment(
                                     new User("Banzai","https://picsum.photos/200"),
                                     new Date(2022,12,1),
-                                    "Fair price"
+                                    "Fair price",
+                                    3.5f
                             )
                         )
                     )
@@ -376,12 +397,14 @@ public class StubData {
                             new Comment(
                                     new User("Elen","https://picsum.photos/200"),
                                     new Date(2022,9,26),
-                                    "Premium price, luxury taste"
+                                    "Premium price, luxury taste",
+                                    5f
                             ),
                             new Comment(
                                     new User("Armstrong","https://picsum.photos/200"),
                                     new Date(2022,8,8),
-                                    "Really big but the price seems off"
+                                    "Really big but the price seems off",
+                                    4f
                             )
                         )
                     )

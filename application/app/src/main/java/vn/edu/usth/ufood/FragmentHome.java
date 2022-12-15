@@ -21,6 +21,7 @@ import vn.edu.usth.ufood.recycler.RecipeAdapter;
 import vn.edu.usth.ufood.recycler.RecyclerTouchListener;
 import vn.edu.usth.ufood.utils.StubData;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class FragmentHome extends Fragment{
 
         ((Main) requireActivity()).setupToolbar(
                 R.id.toolbar,
-                getString(R.string.appbar_welcome) + ", " + getString(R.string.appbar_user),
+                getTimestampText() + ", " + StubData.StubUser.getFirstName(),
                 R.color.colorPink,
                 R.color.colorWhiteTrans,
                 R.drawable.ic_burger
@@ -104,5 +105,29 @@ public class FragmentHome extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_home, menu);
+    }
+
+    public String getTimestampText() {
+        LocalTime target = LocalTime.now();
+        Boolean isMorning = target.isAfter(LocalTime.parse("06:00:00")) && target.isBefore(LocalTime.parse("11:00:00"));
+        Boolean isNoon = target.isAfter(LocalTime.parse("11:00:00")) && target.isBefore(LocalTime.parse("13:00:00"));
+        Boolean isAfternoon = target.isAfter(LocalTime.parse("13:00:00")) && target.isBefore(LocalTime.parse("18:00:00"));
+        Boolean isEvening = target.isAfter(LocalTime.parse("18:00:00")) && target.isBefore(LocalTime.parse("21:00:00"));
+        Boolean isNight = target.isAfter(LocalTime.parse("21:00:00")) || target.isBefore(LocalTime.parse("06:00:00"));
+
+        if (isMorning) {
+            return "Have a good day";
+        } else if (isNoon) {
+            return "Let's get lunch";
+        } else if (isAfternoon) {
+            return "Time for snack";
+        } else if (isEvening) {
+            return "It's dinner time";
+        } else if (isNight) {
+            return "Good night";
+        }
+        else {
+            return "Hello";
+        }
     }
 }

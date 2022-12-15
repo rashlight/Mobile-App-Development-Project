@@ -3,10 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/saved"
+            android:id="@+id/cart"
             android:title="CART" />
         <item
-            android:id="@+id/shop_list"
+            android:id="@+id/history"
             android:title="HISTORY" />
         <item
             android:id="@+id/profile"

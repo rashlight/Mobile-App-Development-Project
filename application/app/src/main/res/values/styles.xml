@@ -10,7 +10,7 @@
     </style>
 
     <style name="Full" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@color/colorPink</item>
         <item name="colorPrimary">@color/colorPink</item>
         <item name="colorPrimaryDark">@color/colorPink</item>
         <item name="colorAccent">@color/colorPink</item>

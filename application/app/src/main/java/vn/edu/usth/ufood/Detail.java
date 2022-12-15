@@ -78,6 +78,35 @@ public class Detail extends BaseActivity {
 
     }
 
+    public static ArrayList<String> getUsername(int position){
+        //int position = getIntent().getIntExtra("position", 0);
+        ArrayList<String> results = new ArrayList<>();
+        StubData.Item item = StubData.StubItems.get(position);
+
+        return results;
+    }
+
+
+    public static ArrayList<String> getDate(int position){
+        ArrayList<String> results = new ArrayList<>();
+        StubData.Item item = StubData.StubItems.get(position);
+        return results;
+    }
+
+
+    public static ArrayList<String> getComments(int position){
+        ArrayList<String> results = new ArrayList<>();
+        StubData.Item item = StubData.StubItems.get(position);
+        return results;
+    }
+
+
+    public static ArrayList<String> getUserphoto(int position){
+        ArrayList<String> results = new ArrayList<>();
+        StubData.Item item = StubData.StubItems.get(position);
+        return results;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -98,6 +127,32 @@ public class Detail extends BaseActivity {
         String userphoto[] = {"https://randomuser.me/api/portraits/women/20.jpg"};
         String img1[] = {"https://images.pexels.com/photos/8382/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb"};
         String img2[] = {"https://images.pexels.com/photos/134574/pexels-photo-134574.jpeg?h=350&auto=compress&cs=tinysrgb"};
+
+        //ArrayList<String> username = StubData.getItemComments();
+
+//  List<String> username = new ArrayList<>();
+//  username.add("");
+//  username.add("");
+//  username.add("");
+//  username.add("");
+//  username.add("");
+//  List<String> date = new ArrayList<>();
+//  date.add(".27-01-2017");
+//  date.add(".28-02-2017");
+//  date.add(".29-03-2017");
+//  date.add(".30-04-2017");
+//  date.add(".30-04-2017");
+//  List<String> comments = new ArrayList<>();
+//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
+//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
+//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
+//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
+//  List<String> userphoto = new ArrayList<>();
+//  userphoto.add("");
+//  userphoto.add("");
+//  userphoto.add("");
+//  userphoto.add("");
+//  userphoto.add("");
 
         for (int i = 0; i < username.length; i++){
             ItemComment comment = new ItemComment();

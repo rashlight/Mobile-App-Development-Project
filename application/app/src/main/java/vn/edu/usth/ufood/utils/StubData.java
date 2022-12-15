@@ -69,9 +69,9 @@ public class StubData {
             this.prepTime = prepTime;
             this.imageLink = imageLink;
             this.price = price;
-            setRating(rating);
             this.extras = extras;
             this.comments = comments;
+            setRating(rating);
         }
 
         public String getId() {
@@ -119,8 +119,8 @@ public class StubData {
         }
 
         public void setRating(float rating) {
+            rating = calculateRatingAvg(this);
             if (rating < 0.0 || rating > 5.0) throw new IndexOutOfBoundsException("Invalid rating");
-            getCommentRating(calculateRatingAvg());
             this.rating = rating;
         }
 
@@ -194,8 +194,7 @@ public class StubData {
         for (Comment comment : item.comments) {
             total += comment.rating;
         }
-        float avg = (float) total / item.comments.size();
-        return avg;
+        return (float) Math.round(total / item.comments.size());
     }
 
     public static ArrayList<String> getItemNames(ArrayList<Item> items) {
@@ -239,20 +238,18 @@ public class StubData {
     public static ArrayList<Float> getItemRatings(ArrayList<Item> items) {
         ArrayList<Float> result = new ArrayList<>();
         for (Item item : items) {
-            result.add(item.rating);
+            result.add(calculateRatingAvg(item));
         }
         return result;
     }
 
-    public static float getItemComment(ArrayList<ArrayList<Comment>> rate) {
-        ArrayList<ArrayList> result = new ArrayList<>();
-        for (ArrayList<Comment> r : rate) {
-            result.add(r.);
+    public static ArrayList<ArrayList<Comment>> getItemComments(ArrayList<Item> rate) {
+        ArrayList<ArrayList<Comment>> result = new ArrayList<>();
+        for (Item item : rate) {
+            result.add(item.getComments());
         }
         return result;
     }
-
-
 
     public static User StubUser = new User(
             "Son Tran Giang",

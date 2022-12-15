@@ -16,8 +16,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import vn.edu.usth.ufood.recycler.CartAdapter;
+import vn.edu.usth.ufood.recycler.CommentsAdapter;
+import vn.edu.usth.ufood.utils.StubData;
 
 public class Cart extends BaseActivity {
+
+    private RecyclerView cartViewItems;
+    private CartAdapter mAdapterItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +51,49 @@ public class Cart extends BaseActivity {
                 finish();
             }
         });
+
+        cartViewItems = (RecyclerView) findViewById(R.id.recyclerView);
+
+        mAdapterItems = new CartAdapter(generateCartItems(), this);
+        LinearLayoutManager mLayoutManagerComment = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        cartViewItems.setLayoutManager(mLayoutManagerComment);
+        cartViewItems.setItemAnimator(new DefaultItemAnimator());
+        cartViewItems.setAdapter(mAdapterItems);
+
+        Boolean isEmpty = StubData.StubCart.isEmpty();
+        if (isEmpty) {
+            findViewById(R.id.textButton).setVisibility(View.GONE);
+        }
+        else {
+            findViewById(R.id.textButton).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     protected void setVars() {
 
+    }
+
+    protected List<StubData.Item> generateCartItems() {
+        return StubData.StubCart;
+    }
+
+    public int total() {
+        int res = 0;
+
+        for (StubData.Item item : StubData.StubCart) {
+            res += item.getPrice();
+        }
+
+        return res;
+    }
+
+    public void checkOut(View view) {
+        int bruh = total();
+        int bonus = bruh / 100;
+        StubData.StubUser.setPoints(StubData.StubUser.getPoints() + bruh);
+        StubData.StubCart.clear();
+        Toast.makeText(this, "Purchase of " + bruh + " done, got " + bonus + " points", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

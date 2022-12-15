@@ -13,4 +13,23 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
+    <Button
+        android:id="@+id/textButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:backgroundTint="@color/colorPinkTrans"
+        android:textColor="@color/colorWhiteTrans"
+        android:layout_marginTop="?actionBarSize"
+        android:onClick="checkOut" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:overScrollMode="never"
+        android:paddingTop="?actionBarSize"
+        android:layout_below="@id/textButton"/>
+
 </RelativeLayout>

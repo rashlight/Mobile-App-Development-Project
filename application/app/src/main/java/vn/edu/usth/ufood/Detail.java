@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import vn.edu.usth.ufood.recycler.CommentsAdapter;
@@ -20,7 +24,11 @@ import vn.edu.usth.ufood.recycler.ItemComment;
 import vn.edu.usth.ufood.recycler.ItemPreparation;
 import vn.edu.usth.ufood.recycler.ItemShopping;
 import vn.edu.usth.ufood.utils.CircleGlide;
+import vn.edu.usth.ufood.utils.StubData;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +38,7 @@ public class Detail extends BaseActivity {
     private RecyclerView recyclerViewComments;
     private CommentsAdapter mAdapterComments;
     private CoordinatorLayout rootView;
+    private StubData.Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,31 @@ public class Detail extends BaseActivity {
 //        recyclerViewPreparation.setItemAnimator(new DefaultItemAnimator());
 //        recyclerViewPreparation.setAdapter(mAdapterPreparation);
 
+        int position = getIntent().getIntExtra("position", 0);
+        item = StubData.StubItems.get(position);
+
+        final ImageView imageComment = (ImageView) findViewById(R.id.iv_user);
+        Glide.with(this)
+                .load(Uri.parse(StubData.StubUser.getAvatarLink()))
+                .transform(new CircleGlide())
+                .into(imageComment);
+
+        final ImageView image = (ImageView) findViewById(R.id.image);
+        Glide.with(this).load(Uri.parse(item.getImageLink())).into(image);
+
+        final TextView item_name = findViewById(R.id.tv_recipe_name);
+        final RatingBar item_rating = findViewById(R.id.ratingBar);
+        final TextView item_price = findViewById(R.id.tv_price);
+        final TextView item_duration = findViewById(R.id.tv_time);
+
+        item_name.setText(item.getName().toUpperCase());
+        item_rating.setRating(item.getRating());
+        item_price.setText(String.valueOf(item.getPrice()));
+
+        long s = item.getPrepTime().toSeconds();
+        String time = String.format("%dm %02ds", s / 60, (s % 60));
+        item_duration.setText(time);
+
         recyclerViewComments = (RecyclerView) findViewById(R.id.recyclerComment);
 
         mAdapterComments = new CommentsAdapter(generateComments(), this);
@@ -65,46 +99,6 @@ public class Detail extends BaseActivity {
         recyclerViewComments.setLayoutManager(mLayoutManagerComment);
         recyclerViewComments.setItemAnimator(new DefaultItemAnimator());
         recyclerViewComments.setAdapter(mAdapterComments);
-
-
-        final ImageView imageComment = (ImageView) findViewById(R.id.iv_user);
-        Glide.with(this)
-                .load(Uri.parse("https://randomuser.me/api/portraits/women/75.jpg"))
-                .transform(new CircleGlide())
-                .into(imageComment);
-
-        final ImageView image = (ImageView) findViewById(R.id.image);
-        Glide.with(this).load(Uri.parse("https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb")).into(image);
-
-    }
-
-    public static ArrayList<String> getUsername(int position){
-        //int position = getIntent().getIntExtra("position", 0);
-        ArrayList<String> results = new ArrayList<>();
-        StubData.Item item = StubData.StubItems.get(position);
-
-        return results;
-    }
-
-
-    public static ArrayList<String> getDate(int position){
-        ArrayList<String> results = new ArrayList<>();
-        StubData.Item item = StubData.StubItems.get(position);
-        return results;
-    }
-
-
-    public static ArrayList<String> getComments(int position){
-        ArrayList<String> results = new ArrayList<>();
-        StubData.Item item = StubData.StubItems.get(position);
-        return results;
-    }
-
-
-    public static ArrayList<String> getUserphoto(int position){
-        ArrayList<String> results = new ArrayList<>();
-        StubData.Item item = StubData.StubItems.get(position);
-        return results;
     }
 
     @Override
@@ -121,51 +115,47 @@ public class Detail extends BaseActivity {
 
     public List<ItemComment> generateComments(){
         List<ItemComment> itemList = new ArrayList<>();
-        String username[] = {"LAURA MAGNAGO"};
-        String date[] = {".27-01-2017"};
-        String comments[] = {"Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week for a gathering and probably many more times! :)"};
-        String userphoto[] = {"https://randomuser.me/api/portraits/women/20.jpg"};
+
+        ArrayList<String> username = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            username.add(c.getUser().getFullName());
+        }
+
+        ArrayList<String> date = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            String dateToStr = DateFormat.getInstance().format(c.getPostDate());
+            date.add(dateToStr);
+        }
+
+        ArrayList<String> comments = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            comments.add(c.getContent());
+        }
+
+        ArrayList<String> userphoto = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            userphoto.add(c.getUser().getAvatarLink());
+        }
+
         String img1[] = {"https://images.pexels.com/photos/8382/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb"};
         String img2[] = {"https://images.pexels.com/photos/134574/pexels-photo-134574.jpeg?h=350&auto=compress&cs=tinysrgb"};
 
-        //ArrayList<String> username = StubData.getItemComments();
-
-//  List<String> username = new ArrayList<>();
-//  username.add("");
-//  username.add("");
-//  username.add("");
-//  username.add("");
-//  username.add("");
-//  List<String> date = new ArrayList<>();
-//  date.add(".27-01-2017");
-//  date.add(".28-02-2017");
-//  date.add(".29-03-2017");
-//  date.add(".30-04-2017");
-//  date.add(".30-04-2017");
-//  List<String> comments = new ArrayList<>();
-//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
-//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
-//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
-//  comments.add("Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week");
-//  List<String> userphoto = new ArrayList<>();
-//  userphoto.add("");
-//  userphoto.add("");
-//  userphoto.add("");
-//  userphoto.add("");
-//  userphoto.add("");
-
-        for (int i = 0; i < username.length; i++){
+        for (int i = 0; i < username.size(); i++){
             ItemComment comment = new ItemComment();
-            comment.setUsername(username[i]);
-            comment.setUserphoto(userphoto[i]);
-            comment.setDate(date[i]);
-            comment.setComments(comments[i]);
-            comment.setImg1(img1[i]);
-            comment.setImg2(img2[i]);
+            comment.setUsername(username.get(i));
+            comment.setUserphoto(userphoto.get(i));
+            comment.setDate(date.get(i));
+            comment.setComments(comments.get(i));
             itemList.add(comment);
         }
+
         return itemList;
     }
 
+    public void addCart(View view) {
+        StubData.StubCart.add(item);
+        Toast.makeText(this, item.getName() + " added to cart", Toast.LENGTH_LONG).show();
+        finish();
+    }
 }
 

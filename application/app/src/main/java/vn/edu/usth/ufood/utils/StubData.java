@@ -251,6 +251,8 @@ public class StubData {
         return result;
     }
 
+    public static ArrayList<Item> StubCart = new ArrayList<>();
+
     public static User StubUser = new User(
             "Son Tran Giang",
             "https://usth.edu.vn/wp-content/uploads/2022/07/pic-tran-giang-son-555x740-1-555x740.jpg",

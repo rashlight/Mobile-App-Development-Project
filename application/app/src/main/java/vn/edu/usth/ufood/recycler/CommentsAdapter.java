@@ -32,8 +32,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.MyView
             date = (TextView) view.findViewById(R.id.tv_date);
             comment = (TextView) view.findViewById(R.id.tv_text_comment);
             userphoto = (ImageView) view.findViewById(R.id.iv_user);
-            img1 = (ImageView) view.findViewById(R.id.imageview1);
-            img2 = (ImageView) view.findViewById(R.id.imageview2);
         }
 
     }
@@ -63,14 +61,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.MyView
                 .load(Uri.parse(itemComment.getUserphoto()))
                 .transform(new CircleGlide())
                 .into(holder.userphoto);
-        Glide.with(context)
-                .load(Uri.parse(itemComment.getImg1()))
-                .centerCrop()
-                .into(holder.img1);
-        Glide.with(context)
-                .load(Uri.parse(itemComment.getImg2()))
-                .centerCrop()
-                .into(holder.img2);
     }
 
     @Override

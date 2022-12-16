@@ -172,7 +172,8 @@
                         android:gravity="center"
                         android:text="MORE"
                         style="@style/Text14Pink"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:onClick="shareContent"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="wrap_content"

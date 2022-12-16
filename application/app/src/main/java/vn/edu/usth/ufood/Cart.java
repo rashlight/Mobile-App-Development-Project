@@ -12,6 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -61,11 +62,14 @@ public class Cart extends BaseActivity {
         cartViewItems.setAdapter(mAdapterItems);
 
         Boolean isEmpty = StubData.StubCart.isEmpty();
+        Button btn = findViewById(R.id.textButton);
+
         if (isEmpty) {
-            findViewById(R.id.textButton).setVisibility(View.GONE);
+            btn.setText("Nothing here...");
+            btn.setEnabled(false);
         }
         else {
-            findViewById(R.id.textButton).setVisibility(View.VISIBLE);
+            btn.setEnabled(true);
         }
     }
 

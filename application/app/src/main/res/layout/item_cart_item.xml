@@ -6,18 +6,18 @@
 
     <ImageView
         android:id="@+id/iv_picture"
-        android:layout_width="@dimen/space24"
-        android:layout_height="@dimen/space24" />
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/ratingBar"
         android:layout_marginStart="3dp"
-        android:paddingLeft="@dimen/space4"
+        android:paddingLeft="@dimen/space8"
+        android:paddingTop="@dimen/space8"
         android:text="ITEM NAME"
         android:textColor="@color/colorTextDark"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textAppearance="@style/SemiBold"
         android:layout_toRightOf="@id/iv_picture"/>
 </RelativeLayout>

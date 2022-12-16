@@ -93,7 +93,7 @@ public class FragmentHome extends Fragment{
             ItemRecipe item = new ItemRecipe();
             item.setRecipe(recipe.get(i));
             item.setTime(time.get(i));
-            item.setPrice(price.get(i) + "k VND");
+            item.setPrice(price.get(i) + " VND");
             item.setRating(rating.get(i));
             item.setImg(img.get(i));
             itemList.add(item);

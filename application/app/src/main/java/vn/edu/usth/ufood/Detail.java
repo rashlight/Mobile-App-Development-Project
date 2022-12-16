@@ -1,5 +1,6 @@
 package vn.edu.usth.ufood;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -156,6 +157,13 @@ public class Detail extends BaseActivity {
         StubData.StubCart.add(item);
         Toast.makeText(this, item.getName() + " added to cart", Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    public void shareContent(View view) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, "Enjoy " + item.getName() + " with me in UFood! #UFood #OrderInStyle #TruongAnhHoang");
+        startActivity(Intent.createChooser(share, "Share Text"));
     }
 }
 

@@ -31,12 +31,12 @@ public class Splash extends BaseActivity {
         // setupToolbar(R.id.toolbar, this.getResources().getString(R.string.app_name), R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        changeStatusBarColor();
 
         new Handler().postDelayed(() -> {
             changeLoginColor();
             changeSplashVisibility();
             changeLoginVisibility();
+            changeStatusBarColor();
 
         }, 1000);
     }

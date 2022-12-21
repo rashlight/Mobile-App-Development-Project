@@ -2,6 +2,7 @@
 - Present by group 9
 ## Members
 | ID | Name | Contribution |
+| - | - | - |
 | BA9-037 | Nguyễn Hải Long | |
 | BI11-004 | Văn Quốc An | Front-end stack |
 | BI11-090 | Phạm Minh Hiếu | Back-end stack |

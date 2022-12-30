@@ -1,7 +1,5 @@
 package com.project.server.model;
 
-import com.project.server.entity.User;
-
 public class UserModel {
 	public String id;
 	public String name;

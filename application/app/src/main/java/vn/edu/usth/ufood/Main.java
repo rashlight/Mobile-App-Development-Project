@@ -1,5 +1,6 @@
 package vn.edu.usth.ufood;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.SubMenu;
 import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,16 +18,20 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import vn.edu.usth.ufood.utils.CircleGlide;
 import vn.edu.usth.ufood.utils.CustomTypefaceSpan;
+import vn.edu.usth.ufood.utils.StubData;
 
 public class Main extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    DrawerLayout drawer;
+
+    private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +66,24 @@ public class Main extends BaseActivity
             applyFontToMenuItem(mi);
         }
 
+        FloatingActionButton fab = findViewById(R.id.app_bar).findViewById(R.id.app_bar_content).findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            startActivity(new Intent(Main.this, Cart.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
+
         View header = navigationView.getHeaderView(0);
         ImageView imageView = (ImageView) header.findViewById(R.id.imageView);
         Glide.with(this)
-                .load(Uri.parse("https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"))
-                .transform(new CircleGlide(this))
+                .load(Uri.parse(StubData.StubUser.getAvatarLink()))
+                .transform(new CircleGlide())
                 .into(imageView);
+
+        TextView name = (TextView) header.findViewById(R.id.nameView);
+        name.setText(StubData.StubUser.getFullName().toUpperCase());
+
+        TextView point = (TextView) header.findViewById(R.id.pointView);
+        point.setText(StubData.StubUser.getPoints() + " Points");
     }
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/SourceSansPro-Semibold.otf");
@@ -106,16 +125,15 @@ public class Main extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.new_recipe) {
-            // Handle the camera action
-        } else if (id == R.id.recipes) {
-
-        } else if (id == R.id.saved) {
-
-        } else if (id == R.id.shop_list) {
-
+        if (id == R.id.cart) {
+            startActivity(new Intent(Main.this, Cart.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        } else if (id == R.id.history) {
+            Toast.makeText(this, "This feature is not available.", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.profile) {
+            Toast.makeText(this, "This feature is not available.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.setting) {
-
+            Toast.makeText(this, "This feature is not available.", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

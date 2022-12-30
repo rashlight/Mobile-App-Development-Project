@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.support.v4.os.IResultReceiver;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,7 +19,9 @@ import android.view.ViewGroup;
 import vn.edu.usth.ufood.recycler.ItemRecipe;
 import vn.edu.usth.ufood.recycler.RecipeAdapter;
 import vn.edu.usth.ufood.recycler.RecyclerTouchListener;
+import vn.edu.usth.ufood.utils.StubData;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +45,7 @@ public class FragmentHome extends Fragment{
 
         ((Main) requireActivity()).setupToolbar(
                 R.id.toolbar,
-                getString(R.string.appbar_welcome) + ", " + getString(R.string.appbar_user),
+                getTimestampText() + ", " + StubData.StubUser.getFirstName(),
                 R.color.colorPink,
                 R.color.colorWhiteTrans,
                 R.drawable.ic_burger
@@ -61,8 +65,11 @@ public class FragmentHome extends Fragment{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                startActivity(new Intent(getActivity(), Detail.class));
-                    //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
+
+                //Detail.navigate(appCompatActivity, view.findViewById(R.id.iv_recipe));
+                Intent intent = new Intent(getActivity(),Detail.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
 
             @Override
@@ -76,24 +83,19 @@ public class FragmentHome extends Fragment{
   
     private List<ItemRecipe> setupRecipe(){
         itemList = new ArrayList<>();
-        String recipe[] = {"BLOOD ORANGE CAKE", "SEMIFREDDO TIRAMISU", "MARBLE CAKE", "RICE PUDDING", "RAINBOW CAKE", "ICE CREAM", "STROWBERRY CAKE", "CUPCAKE FRUIT"};
-        String img[] = {"https://images.pexels.com/photos/53468/dessert-orange-food-chocolate-53468.jpeg?h=350&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/159887/pexels-photo-159887.jpeg?h=350&auto=compress",
-                "https://images.pexels.com/photos/136745/pexels-photo-136745.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/39355/dessert-raspberry-leaf-almond-39355.jpeg?h=350&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/239578/pexels-photo-239578.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/8382/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/51186/pexels-photo-51186.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb",
-                "https://images.pexels.com/photos/55809/dessert-strawberry-tart-berry-55809.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"};
-        String time[] = {"1h 5'", "30m", "1h 10'", "50m", "20m", "1h 20'", "20m", "1h 20'"};
-        float rating[] = {3, 4, 4, 3, 5, 4, 4, 3};
+        ArrayList<String> recipe = StubData.getItemNames(StubData.StubItems);
+        ArrayList<String> img = StubData.getItemImageLinks(StubData.StubItems);
+        ArrayList<String> time = StubData.getItemDurations(StubData.StubItems);
+        ArrayList<String> price = StubData.getItemPrice(StubData.StubItems);
+        ArrayList<Float> rating = StubData.getItemRatings(StubData.StubItems);
 
-        for (int i = 0; i<recipe.length; i++){
+        for (int i = 0; i < recipe.size(); i++){
             ItemRecipe item = new ItemRecipe();
-            item.setRecipe(recipe[i]);
-            item.setTime(time[i]);
-            item.setRating(rating[i]);
-            item.setImg(img[i]);
+            item.setRecipe(recipe.get(i));
+            item.setTime(time.get(i));
+            item.setPrice(price.get(i) + " VND");
+            item.setRating(rating.get(i));
+            item.setImg(img.get(i));
             itemList.add(item);
         }
         return itemList;
@@ -103,5 +105,29 @@ public class FragmentHome extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_home, menu);
+    }
+
+    public String getTimestampText() {
+        LocalTime target = LocalTime.now();
+        Boolean isMorning = target.isAfter(LocalTime.parse("06:00:00")) && target.isBefore(LocalTime.parse("11:00:00"));
+        Boolean isNoon = target.isAfter(LocalTime.parse("11:00:00")) && target.isBefore(LocalTime.parse("13:00:00"));
+        Boolean isAfternoon = target.isAfter(LocalTime.parse("13:00:00")) && target.isBefore(LocalTime.parse("18:00:00"));
+        Boolean isEvening = target.isAfter(LocalTime.parse("18:00:00")) && target.isBefore(LocalTime.parse("21:00:00"));
+        Boolean isNight = target.isAfter(LocalTime.parse("21:00:00")) || target.isBefore(LocalTime.parse("06:00:00"));
+
+        if (isMorning) {
+            return "Have a good day";
+        } else if (isNoon) {
+            return "Let's get lunch";
+        } else if (isAfternoon) {
+            return "Time for snack";
+        } else if (isEvening) {
+            return "It's dinner time";
+        } else if (isNight) {
+            return "Good night";
+        }
+        else {
+            return "Hello";
+        }
     }
 }

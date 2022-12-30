@@ -1,5 +1,6 @@
 package vn.edu.usth.ufood;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -12,7 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import vn.edu.usth.ufood.recycler.CommentsAdapter;
@@ -20,7 +25,11 @@ import vn.edu.usth.ufood.recycler.ItemComment;
 import vn.edu.usth.ufood.recycler.ItemPreparation;
 import vn.edu.usth.ufood.recycler.ItemShopping;
 import vn.edu.usth.ufood.utils.CircleGlide;
+import vn.edu.usth.ufood.utils.StubData;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +39,7 @@ public class Detail extends BaseActivity {
     private RecyclerView recyclerViewComments;
     private CommentsAdapter mAdapterComments;
     private CoordinatorLayout rootView;
+    private StubData.Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,31 @@ public class Detail extends BaseActivity {
 //        recyclerViewPreparation.setItemAnimator(new DefaultItemAnimator());
 //        recyclerViewPreparation.setAdapter(mAdapterPreparation);
 
+        int position = getIntent().getIntExtra("position", 0);
+        item = StubData.StubItems.get(position);
+
+        final ImageView imageComment = (ImageView) findViewById(R.id.iv_user);
+        Glide.with(this)
+                .load(Uri.parse(StubData.StubUser.getAvatarLink()))
+                .transform(new CircleGlide())
+                .into(imageComment);
+
+        final ImageView image = (ImageView) findViewById(R.id.image);
+        Glide.with(this).load(Uri.parse(item.getImageLink())).into(image);
+
+        final TextView item_name = findViewById(R.id.tv_recipe_name);
+        final RatingBar item_rating = findViewById(R.id.ratingBar);
+        final TextView item_price = findViewById(R.id.tv_price);
+        final TextView item_duration = findViewById(R.id.tv_time);
+
+        item_name.setText(item.getName().toUpperCase());
+        item_rating.setRating(item.getRating());
+        item_price.setText(String.valueOf(item.getPrice()));
+
+        long s = item.getPrepTime().toSeconds();
+        String time = String.format("%dm %02ds", s / 60, (s % 60));
+        item_duration.setText(time);
+
         recyclerViewComments = (RecyclerView) findViewById(R.id.recyclerComment);
 
         mAdapterComments = new CommentsAdapter(generateComments(), this);
@@ -65,17 +100,6 @@ public class Detail extends BaseActivity {
         recyclerViewComments.setLayoutManager(mLayoutManagerComment);
         recyclerViewComments.setItemAnimator(new DefaultItemAnimator());
         recyclerViewComments.setAdapter(mAdapterComments);
-
-
-        final ImageView imageComment = (ImageView) findViewById(R.id.iv_user);
-        Glide.with(this)
-                .load(Uri.parse("https://randomuser.me/api/portraits/women/75.jpg"))
-                .transform(new CircleGlide(this))
-                .into(imageComment);
-
-        final ImageView image = (ImageView) findViewById(R.id.image);
-        Glide.with(this).load(Uri.parse("https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb")).into(image);
-
     }
 
     @Override
@@ -90,56 +114,56 @@ public class Detail extends BaseActivity {
         return true;
     }
 
-    public List<ItemShopping> generateShopping(){
-        List<ItemShopping> itemList = new ArrayList<>();
-        String name[] = {"butter", "brown", "eggs", "flour", "baking powder", "of salt", "buttermilk", "orange juice"};
-        String pieces[] = {"200g", "200g", "4", "300g", "2tsp", "1 pinch", "100ml", "50ml"};
-        float rating[] = {3, 4, 4, 3, 5, 4, 4, 3};
-
-        for (int i = 0; i<name.length; i++){
-            ItemShopping item = new ItemShopping();
-            item.setPieces(pieces[i]);
-            item.setName(name[i]);
-            itemList.add(item);
-        }
-        return itemList;
-    }
     public List<ItemComment> generateComments(){
         List<ItemComment> itemList = new ArrayList<>();
-        String username[] = {"LAURA MAGNAGO"};
-        String date[] = {".27-01-2017"};
-        String comments[] = {"Made this for a BBQ today and it was amazing. Bought 2 Madiera cakes from Tesco and cut them Into wedges. Poured the coffee over the top. And used 75ml of Ameretti instead of masala in the cream. Will be making again next week for a gathering and probably many more times! :)"};
-        String userphoto[] = {"https://randomuser.me/api/portraits/women/20.jpg"};
+
+        ArrayList<String> username = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            username.add(c.getUser().getFullName());
+        }
+
+        ArrayList<String> date = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            String dateToStr = DateFormat.getInstance().format(c.getPostDate());
+            date.add(dateToStr);
+        }
+
+        ArrayList<String> comments = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            comments.add(c.getContent());
+        }
+
+        ArrayList<String> userphoto = new ArrayList<>();
+        for (StubData.Comment c : item.getComments()) {
+            userphoto.add(c.getUser().getAvatarLink());
+        }
+
         String img1[] = {"https://images.pexels.com/photos/8382/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb"};
         String img2[] = {"https://images.pexels.com/photos/134574/pexels-photo-134574.jpeg?h=350&auto=compress&cs=tinysrgb"};
 
-        for (int i = 0; i<username.length; i++){
+        for (int i = 0; i < username.size(); i++){
             ItemComment comment = new ItemComment();
-            comment.setUsername(username[i]);
-            comment.setUserphoto(userphoto[i]);
-            comment.setDate(date[i]);
-            comment.setComments(comments[i]);
-            comment.setImg1(img1[i]);
-            comment.setImg2(img2[i]);
+            comment.setUsername(username.get(i));
+            comment.setUserphoto(userphoto.get(i));
+            comment.setDate(date.get(i));
+            comment.setComments(comments.get(i));
             itemList.add(comment);
         }
+
         return itemList;
     }
 
-    public List<ItemPreparation> generatePreparation(){
-        List<ItemPreparation> itemList = new ArrayList<>();
-        String step[] = {"In a medium saucepan, whisk together egg yolks and sugar until well blended. Whisk in milk and cook over medium heat, stirring constantly, until mixture boils. Boil gently for 1 minute, remove from heat and allow to cool slightly. Cover tightly and chill in refrigerator 1 hour.",
-                "In a medium bowl, beat cream with vanilla until stiff peaks form. Whisk mascarpone into yolk mixture until smooth.",
-                "In a small bowl, combine coffee and rum. Split ladyfingers in half lengthwise and drizzle with coffee mixture.",
-                "Arrange half of soaked ladyfingers in bottom of a 7x11 inch dish. Spread half of mascarpone mixture over ladyfingers, then half of whipped cream over that. Repeat layers and sprinkle with cocoa. Cover and refrigerate 4 to 6 hours, until set."};
+    public void addCart(View view) {
+        StubData.StubCart.add(item);
+        Toast.makeText(this, item.getName() + " added to cart", Toast.LENGTH_LONG).show();
+        finish();
+    }
 
-        for (int i = 0; i<step.length; i++){
-            ItemPreparation item = new ItemPreparation();
-            item.setStep(step[i]);
-            item.setNumber(String.valueOf(i+1));
-            itemList.add(item);
-        }
-        return itemList;
+    public void shareContent(View view) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, "Enjoy " + item.getName() + " with me in UFood! #UFood #OrderInStyle #TruongAnhHoang");
+        startActivity(Intent.createChooser(share, "Share Text"));
     }
 }
 

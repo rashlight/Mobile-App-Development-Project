@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
@@ -29,13 +30,13 @@
         android:gravity="center_horizontal"
         style="@style/SemiBold"/>
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_time"
-        android:drawablePadding="@dimen/space8"
+        android:drawablePadding="@dimen/space4"
         android:text="1h 20'"
-        android:textSize="@dimen/h3"
+        android:textSize="@dimen/h2"
         android:textColor="@color/colorTextGrey"
-        android:textAppearance="@style/Regular"/>
+        android:textAppearance="@style/Regular"
+        app:drawableLeftCompat="@drawable/ic_baseline_money_24" />
 </LinearLayout>

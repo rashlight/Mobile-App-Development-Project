@@ -6,12 +6,19 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class CircleGlide extends BitmapTransformation {
-    public CircleGlide(Context context) {
-        super(context);
+    static final String pkgName = "vn.edu.usth.ufood";
+
+    public CircleGlide() {
+        super();
     }
 
     @Override protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
@@ -42,7 +49,12 @@ public class CircleGlide extends BitmapTransformation {
         return result;
     }
 
-    @Override public String getId() {
+    public String getId() {
         return getClass().getName();
+    }
+
+    @Override
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+        messageDigest.update(pkgName.getBytes(StandardCharsets.UTF_8));
     }
 }

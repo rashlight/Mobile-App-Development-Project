@@ -67,8 +67,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="ffffff" />
-                                                <entry key="imagePath" value="/tmp/baseline_shopping_cart_24.xml" />
+                                                <entry key="color" value="9195a0" />
+                                                <entry key="imagePath" value="/tmp/baseline_money_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -79,7 +79,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/opt/android-sdk/icons/material/materialicons/shopping_cart/baseline_shopping_cart_24.xml" />
+                                                <entry key="url" value="file:/opt/android-sdk/icons/material/materialicons/money/baseline_money_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -91,7 +91,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Desktop/drawing.svg" />
+                                                <entry key="imagePath" value="$USER_HOME$/Desktop" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -123,8 +123,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="outputName" value="ic_shopping_cart" />
+                                      <entry key="outputName" value="ic_money" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -311,10 +313,25 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="file:/opt/android-sdk/icons/material/materialicons/money/baseline_money_24.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_launcher" />
+                            <entry key="color" value="9195a0" />
+                            <entry key="outputName" value="ic_baseline_money_24" />
                             <entry key="sourceFile" value="$USER_HOME$/Desktop/ufood_2_dark (copy 1).svg" />
                           </map>
                         </option>

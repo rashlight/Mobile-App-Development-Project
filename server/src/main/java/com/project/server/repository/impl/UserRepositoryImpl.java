@@ -47,4 +47,15 @@ public class UserRepositoryImpl implements UserRepository {
             em.remove(User);
         }
     }
+
+    @Override
+    public UserModel findbyToken(String Token) {
+        TypedQuery<UserModel>query = em.createQuery("select u from Usermodel u where u.Token=:Token",UserModel.class);
+        query.setParameter("Token",Token);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+        return null;
+    }
+    }
 }

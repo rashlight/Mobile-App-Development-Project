@@ -14,9 +14,8 @@ public class UserAccountDetail {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private UUID id;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="userid")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userid",referencedColumnName = "user_id")
     private User userid;
 
     private String firstname;

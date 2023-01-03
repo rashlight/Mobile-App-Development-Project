@@ -9,13 +9,13 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private UUID userid;
-    @OneToOne(mappedBy = "User",cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="logindetail_id",referencedColumnName = "id")
     private UserLoginDetail LoginDetail;
-    @OneToOne(mappedBy = "User",cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="AccountDetail_id",referencedColumnName = "id")
     private UserAccountDetail AccountDetail;
 
     public UUID getUserid() {

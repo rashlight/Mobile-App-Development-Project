@@ -10,13 +10,16 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table
+@Table(name = "UserLoginDetail")
 public class UserLoginDetail {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private UUID id;
-    private UUID userid;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="userid")
+    private User userid;
     private String username;
     private String password;
     private String email;
@@ -27,7 +30,7 @@ public class UserLoginDetail {
     }
 
     public UserLoginDetail(UUID id,
-                           UUID userid,
+                           User userid,
                            String username,
                            String password,
                            String email,
@@ -54,11 +57,11 @@ public class UserLoginDetail {
         TokenGeneratedDate = tokenGeneratedDate;
     }
 
-    public UUID getUserid() {
+    public User getUserid() {
         return userid;
     }
 
-    public void setUserid(UUID userid) {
+    public void setUserid(User userid) {
         this.userid = userid;
     }
 
@@ -94,7 +97,7 @@ public class UserLoginDetail {
         Token = token;
     }
 
-    public Date getTokenGeneratedDate() {
+    public Time getTokenGeneratedDate() {
         return TokenGeneratedDate;
     }
 

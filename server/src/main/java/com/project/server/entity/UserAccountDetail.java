@@ -8,12 +8,17 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Table(name = "UserAccountDetail")
 public class UserAccountDetail {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private UUID id;
-    private UUID userid;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="userid")
+    private User userid;
+
     private String firstname;
     private String secondname;
     private String gender;
@@ -22,7 +27,7 @@ public class UserAccountDetail {
     public UserAccountDetail(){}
 
     public UserAccountDetail(UUID id,
-                             UUID userid,
+                             User userid,
                              String firstname,
                              String secondname,
                              String gender,
@@ -53,11 +58,11 @@ public class UserAccountDetail {
         this.id = id;
     }
 
-    public UUID getUserid() {
+    public User getUserid() {
         return userid;
     }
 
-    public void setUserid(UUID userid) {
+    public void setUserid(User userid) {
         this.userid = userid;
     }
 

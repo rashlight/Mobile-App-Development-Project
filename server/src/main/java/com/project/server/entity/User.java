@@ -8,7 +8,7 @@ import java.util.UUID;
 @Table(name = "User")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     @Column(name = "user_id", nullable = false)
     private UUID userid;
     @OneToOne(cascade = CascadeType.ALL)

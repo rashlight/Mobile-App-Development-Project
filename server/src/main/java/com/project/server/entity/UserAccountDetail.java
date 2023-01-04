@@ -11,29 +11,28 @@ import java.util.UUID;
 @Table(name = "UserAccountDetail")
 public class UserAccountDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     @Column(name = "id", nullable = false)
     private UUID id;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userid",referencedColumnName = "user_id")
-    private User userid;
-
+    @Column(name="First_name",nullable = false)
     private String firstname;
+    @Column(name="Second_name",nullable = false)
     private String secondname;
+    @Column(name="Gender",nullable = false)
     private String gender;
+    @Column(name="Dob",nullable = false)
     private Date Dob;
+    @Column(name="Role")
     private String role;
     public UserAccountDetail(){}
 
     public UserAccountDetail(UUID id,
-                             User userid,
                              String firstname,
                              String secondname,
                              String gender,
                              Date dob,
                              String role) {
         this.id = id;
-        this.userid = userid;
         this.firstname = firstname;
         this.secondname = secondname;
         this.gender = gender;
@@ -57,13 +56,7 @@ public class UserAccountDetail {
         this.id = id;
     }
 
-    public User getUserid() {
-        return userid;
-    }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
-    }
 
     public String getFirstname() {
         return firstname;

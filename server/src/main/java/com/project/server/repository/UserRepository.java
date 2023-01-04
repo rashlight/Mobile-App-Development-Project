@@ -1,7 +1,10 @@
 package com.project.server.repository;
 
-import com.project.server.model.UserModel;
+import com.project.server.entity.*;
 
-public interface UserRepository extends Repository<UserModel>{
-    UserModel findbyToken(String Token);
+import java.util.UUID;
+
+public interface UserRepository extends Repository<User>{
+    User findbyAccDetailId(UUID ID);
+    User findbyAccLoginId(UUID ID);
 }

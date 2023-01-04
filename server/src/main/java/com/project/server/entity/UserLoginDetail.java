@@ -13,30 +13,30 @@ import java.util.UUID;
 @Table(name = "UserLoginDetail")
 public class UserLoginDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     @Column(name = "id", nullable = false)
     private UUID id;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userid",referencedColumnName = "user_id")
-    private User userid;
+    @Column(name="Username",nullable = false)
     private String username;
+    @Column(name="Password",nullable = false)
     private String password;
+    @Column(name="Email",nullable = false)
     private String email;
+    @Column(name="Token",nullable = false)
     private String Token;
+    @Column(name="TokenGeneratedDate",nullable = false)
     private Time TokenGeneratedDate;
 
     public UserLoginDetail() {
     }
 
     public UserLoginDetail(UUID id,
-                           User userid,
                            String username,
                            String password,
                            String email,
                            String token,
                            Time tokenGeneratedDate) {
         this.id = id;
-        this.userid = userid;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -56,13 +56,7 @@ public class UserLoginDetail {
         TokenGeneratedDate = tokenGeneratedDate;
     }
 
-    public User getUserid() {
-        return userid;
-    }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
-    }
 
     public String getUsername() {
         return username;

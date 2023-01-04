@@ -1,27 +1,28 @@
 package com.project.server.repository.impl;
 
-import com.project.server.model.UserModel;
+import com.project.server.entity.*;
 import com.project.server.repository.UserRepository;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
+@Repository
 public class UserRepositoryImpl implements UserRepository {
     @PersistenceContext
     private EntityManager em;
     @Override
-    public List<UserModel> findAll() {
-        TypedQuery<UserModel>query = em.createQuery("select u from UserModel u ",UserModel.class);
+    public List<User> findAll() {
+        TypedQuery<User>query = em.createQuery("select u from User u ",User.class);
         return query.getResultList();
     }
 
     @Override
-    public UserModel findById(UUID id) {
-        TypedQuery<UserModel>query = em.createQuery("select u from Usermodel u where u.UserID=:id",UserModel.class);
+    public User findById(UUID id) {
+        TypedQuery<User>query = em.createQuery("select u from User u where u.userid=:id",User.class);
         query.setParameter("id",id);
         try{
             return query.getSingleResult();
@@ -30,9 +31,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
     }
 
+
+
     @Override
-    public void save(UserModel model) {
-        if(model.getUserID() != null){
+    public void save(User model) {
+        if(model.getUserid() != null){
             em.merge(model);
         }
         else{
@@ -42,20 +45,31 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void remove(UUID id) {
-        UserModel User = findById(id);
-        if (User != null){
-            em.remove(User);
+        User user = findById(id);
+        if (user != null){
+            em.remove(user);
         }
     }
 
     @Override
-    public UserModel findbyToken(String Token) {
-        TypedQuery<UserModel>query = em.createQuery("select u from Usermodel u where u.Token=:Token",UserModel.class);
-        query.setParameter("Token",Token);
+    public User findbyAccDetailId(UUID ID) {
+        TypedQuery<User>query = em.createQuery("select u from User u where u.AccountDetail=:id",User.class);
+        query.setParameter("id",ID);
         try{
             return query.getSingleResult();
-        }catch(NoResultException e){
-        return null;
+        }catch (NoResultException e){
+            return null;
+        }
     }
+
+    @Override
+    public User findbyAccLoginId(UUID ID) {
+        TypedQuery<User>query = em.createQuery("select u from User u where u.LoginDetail=:id",User.class);
+        query.setParameter("id",ID);
+        try{
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
     }
 }

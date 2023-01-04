@@ -1,6 +1,7 @@
 package com.project.server.controller;
 
 
+import com.project.server.dto.UserModel;
 import com.project.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,8 @@ import java.util.UUID;
 
 @RestController
 public class UserController {
-//    @Autowired
-//    UserService userService;
+    @Autowired
+    UserService userService;
 //    @GetMapping("/api/users")
 //    public List<UserModel> listUser(){
 //        List<UserModel> users = userService.findAll();
@@ -35,12 +36,12 @@ public class UserController {
 //        }
 //
 //    }
-//    @PostMapping("/api/users")
-//    public ModelAndView CreateUser(UserModel userModel){
-//        userService.save(userModel);
-//        ModelAndView modelAndView = new ModelAndView("/users/create");
-//        modelAndView.addObject("users",userModel);
-//        modelAndView.addObject("message","successfully");
-//        return modelAndView;
-//    }
+    @PostMapping("/api/users")
+    public ModelAndView CreateUser(@RequestBody UserModel userModel){
+        userService.save(userModel);
+        ModelAndView modelAndView = new ModelAndView("/users/create");
+        modelAndView.addObject("users",userModel);
+        modelAndView.addObject("message","successfully");
+        return modelAndView;
+    }
 }

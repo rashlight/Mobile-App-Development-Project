@@ -2,6 +2,7 @@ package com.project.server.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.UUID;
 
 @Entity
@@ -11,12 +12,29 @@ public class User {
     @GeneratedValue(generator = "UUID")
     @Column(name = "user_id", nullable = false)
     private UUID userid;
+    @Column(name = "created_date",nullable = false)
+    private Date createddate;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="logindetail_id",referencedColumnName = "id")
     private UserLoginDetail LoginDetail;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="AccountDetail_id",referencedColumnName = "id")
     private UserAccountDetail AccountDetail;
+
+    public User(UUID userid, Date createddate, UserLoginDetail loginDetail, UserAccountDetail accountDetail) {
+        this.userid = userid;
+        this.createddate = createddate;
+        LoginDetail = loginDetail;
+        AccountDetail = accountDetail;
+    }
+
+    public Date getCreateddate() {
+        return createddate;
+    }
+
+    public void setCreateddate(Date createddate) {
+        this.createddate = createddate;
+    }
 
     public UUID getUserid() {
         return userid;

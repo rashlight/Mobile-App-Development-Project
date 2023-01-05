@@ -38,7 +38,7 @@ public class UserController {
 //    }
     @PostMapping("/api/users")
     public ModelAndView CreateUser(@RequestBody UserModel userModel){
-        userService.save(userModel);
+        userService.addNewUser(userModel);
         ModelAndView modelAndView = new ModelAndView("/users/create");
         modelAndView.addObject("users",userModel);
         modelAndView.addObject("message","successfully");

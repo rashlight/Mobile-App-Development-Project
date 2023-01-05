@@ -1,7 +1,7 @@
 package com.project.server.dto;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 public class UserModel {

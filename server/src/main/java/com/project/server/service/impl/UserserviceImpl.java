@@ -83,6 +83,10 @@ public class UserserviceImpl implements UserService<UserModel> {
                                                                 user.getSecondname(),
                                                                  user.getGender(),
                                                              user.getDob(),user.getRole() );
-        return null;
+        User new_user = new User(user.getUserid(),user.getCreateddate(),loginDetail,accountDetail);
+        userRepository.save(new_user);
+        userLoginRepository.save(loginDetail);
+        userAccountRepository.save(accountDetail);
+        return user;
     }
 }

@@ -12,4 +12,6 @@ public interface UserService<T> {
     void save(T model);
     void remove(UUID id);
     T addNewUser(T user);
+
+    T findbyPassword(String username,String password);
 }

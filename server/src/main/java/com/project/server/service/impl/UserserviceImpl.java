@@ -59,7 +59,22 @@ public class UserserviceImpl implements UserService<UserModel> {
 
     @Override
     public UserModel findbyToken(String token) {
-        return null;
+        UserLoginDetail loginDetail = userLoginRepository.findUserByToken(token);
+        User user = userRepository.findIdfromLoginid(loginDetail.getId());
+        UserAccountDetail accountDetail = user.getAccountDetail();
+        UserModel model = new UserModel(user.getUserid(),
+                accountDetail.getFirstname(),
+                accountDetail.getSecondname(),
+                accountDetail.getDob(),
+                accountDetail.getRole(),
+                loginDetail.getUsername(),
+                loginDetail.getPassword(),
+                accountDetail.getGender(),
+                loginDetail.getEmail(),
+                loginDetail.getToken(),
+                loginDetail.getTokenGeneratedDate(),
+                user.getCreateddate());
+        return model;
     }
 
     @Override
@@ -88,5 +103,25 @@ public class UserserviceImpl implements UserService<UserModel> {
         userLoginRepository.save(loginDetail);
         userAccountRepository.save(accountDetail);
         return user;
+    }
+
+    @Override
+    public UserModel findbyPassword(String username, String password) {
+        UserLoginDetail loginDetail = userLoginRepository.findUserByPassword(username,password);
+        User user = userRepository.findIdfromLoginid(loginDetail.getId());
+        UserAccountDetail accountDetail = user.getAccountDetail();
+        UserModel model = new UserModel(user.getUserid(),
+                                    accountDetail.getFirstname(),
+                                        accountDetail.getSecondname(),
+                                                accountDetail.getDob(),
+                                                accountDetail.getRole(),
+                                                loginDetail.getUsername(),
+                                                loginDetail.getPassword(),
+                                                    accountDetail.getGender(),
+                                                    loginDetail.getEmail(),
+                                                loginDetail.getToken(),
+                                                 loginDetail.getTokenGeneratedDate(),
+                                                  user.getCreateddate());
+        return model;
     }
 }

@@ -18,8 +18,11 @@ public class User {
     @JoinColumn(name="logindetail_id",referencedColumnName = "id")
     private UserLoginDetail LoginDetail;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="AccountDetail_id",referencedColumnName = "id")
+    @JoinColumn(name="accountdetail_id",referencedColumnName = "id")
     private UserAccountDetail AccountDetail;
+
+    public User() {
+    }
 
     public User(UUID userid, Date createddate, UserLoginDetail loginDetail, UserAccountDetail accountDetail) {
         this.userid = userid;

@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface UserCustomRepository {
-    @Query("Select u from User u where u.logindetail_id= :id ")
+    @Query("Select u from User u where u.LoginDetail.id= :id ")
     User findIdfromLoginid(@Param("id") UUID id);
-    @Query("Select u from User u where u.AccountDetail_id= :id ")
+    @Query("Select u from User u where u.AccountDetail.id= :id ")
     User findIdfromAccountid(@Param("id") UUID id);
 }

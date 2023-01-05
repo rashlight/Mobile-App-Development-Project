@@ -14,15 +14,15 @@ import java.util.UUID;
 public class UserLoginDetail {
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false,unique = true)
     private UUID id;
-    @Column(name="Username",nullable = false)
+    @Column(name="Username",nullable = false,unique = true)
     private String username;
     @Column(name="Password",nullable = false)
     private String password;
     @Column(name="Email",nullable = false)
     private String email;
-    @Column(name="Token",nullable = false)
+    @Column(name="Token",nullable = false,unique = true)
     private String Token;
     @Column(name="TokenGeneratedDate",nullable = false)
     private Time TokenGeneratedDate;

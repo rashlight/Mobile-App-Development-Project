@@ -12,7 +12,7 @@ import java.util.UUID;
 public class UserAccountDetail {
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false,unique = true)
     private UUID id;
     @Column(name="First_name",nullable = false)
     private String firstname;

@@ -5,6 +5,7 @@ import com.project.server.dto.UserModel;
 import com.project.server.entity.User;
 import com.project.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,19 @@ public class UserController {
 
     }
     @PostMapping("/api/users/create")
-    public ResponseEntity<UserModel> CreateUser(@RequestBody UserModel userModel){
-        UserModel user = userService.addNewUser(userModel);
+    @ResponseBody
+    public ResponseEntity voidCreateUser(@RequestBody UserModel userModel){
+        if (userModel == null){
+            return new ResponseEntity<String>("Bad request",HttpStatus.BAD_REQUEST);
+        }
+        try {
+            userService.addNewUser(userModel);
+            return new ResponseEntity<String>("User Created",HttpStatus.CREATED);
+        }catch(OptimisticLockingFailureException Fe)
+            {
+            return new ResponseEntity<String>("Server Error",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
     @GetMapping("/api/users")
     public ResponseEntity<UserModel> getUserByPassword(@RequestParam String username,@RequestParam String password){

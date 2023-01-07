@@ -3,6 +3,7 @@
 Created by group X
 
 ### Application properties file
+Still in Development process so you can modified it as you like then place in resource folder
 ```
   spring.jpa.hibernate.ddl-auto=update
   spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/usth_food_db
@@ -12,11 +13,18 @@ Created by group X
 ```  
 
 ### API usage
-GET requests are used by passing query parameters, for example:
+GET requests are used by passing query parameters
+- Login with Username and Password
 ```
-http://localhost:5000/api/username=...&password=...
+http://localhost:8080/api/users?username=...&password=...
 ```
-POST requests will use a compliant JSON body, for example:
+- Find user by token
+```
+http://localhost:8080/api/users/{Token}
+```
+
+POST requests will use a compliant JSON body
+- Add new user or sign up
 ```
 {
     "firstname": "Pham",
@@ -30,6 +38,6 @@ POST requests will use a compliant JSON body, for example:
     "token":"123456789",
     "tokenGeneratedDate":"10:10:10",
     "createddate":"2002-04-16"
+    "avatarContent":"base64stringimageencoded"
 }
 ```
-Reponse are temporarily the same

@@ -52,7 +52,8 @@ public class UserserviceImpl implements UserService<UserModel> {
                 loginDetail.get().getEmail(),
                 loginDetail.get().getToken(),
                 loginDetail.get().getTokenGeneratedDate(),
-                user.get().getCreateddate());
+                user.get().getCreateddate(),
+                accountDetail.get().getAvatarContent());
 
         return model;
     }
@@ -73,7 +74,8 @@ public class UserserviceImpl implements UserService<UserModel> {
                 loginDetail.getEmail(),
                 loginDetail.getToken(),
                 loginDetail.getTokenGeneratedDate(),
-                user.getCreateddate());
+                user.getCreateddate(),
+                accountDetail.getAvatarContent());
         return model;
     }
 
@@ -97,7 +99,8 @@ public class UserserviceImpl implements UserService<UserModel> {
         UserAccountDetail accountDetail = new UserAccountDetail(user.getFirstname(),
                                                                 user.getSecondname(),
                                                                  user.getGender(),
-                                                             user.getDob(),user.getRole() );
+                                                             user.getDob(),user.getRole(),
+                                                            user.getAvatarContent());
         User new_user = new User(user.getUserid(),user.getCreateddate(),loginDetail,accountDetail);
         userRepository.save(new_user);
         userLoginRepository.save(loginDetail);
@@ -121,7 +124,7 @@ public class UserserviceImpl implements UserService<UserModel> {
                                                     loginDetail.getEmail(),
                                                 loginDetail.getToken(),
                                                  loginDetail.getTokenGeneratedDate(),
-                                                  user.getCreateddate());
+                                                  user.getCreateddate(),accountDetail.getAvatarContent());
         return model;
     }
 }

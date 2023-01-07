@@ -17,6 +17,7 @@ public class UserModel {
     private String Token;
     private Time TokenGeneratedDate;
     private Date createddate;
+    private String avatarContent;
 
     public UserModel(UUID userid,
                      String firstname,
@@ -28,7 +29,8 @@ public class UserModel {
                      String email,
                      String token,
                      Time tokenGeneratedDate,
-                     Date createddate) {
+                     Date createddate,
+                     String avatarContent) {
         this.userid = userid;
         this.firstname = firstname;
         this.secondname = secondname;
@@ -41,6 +43,7 @@ public class UserModel {
         Token = token;
         TokenGeneratedDate = tokenGeneratedDate;
         this.createddate=createddate;
+        this.avatarContent = avatarContent;
     }
 
     public String getGender() {
@@ -137,5 +140,13 @@ public class UserModel {
 
     public void setCreateddate(Date createddate) {
         this.createddate = createddate;
+    }
+
+    public String getAvatarContent() {
+        return avatarContent;
+    }
+
+    public void setAvatarContent(String avatarContent) {
+        this.avatarContent = avatarContent;
     }
 }

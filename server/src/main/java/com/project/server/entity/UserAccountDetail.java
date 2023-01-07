@@ -5,6 +5,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
+import java.util.Base64;
 import java.util.UUID;
 
 @Entity
@@ -14,16 +15,18 @@ public class UserAccountDetail {
     @GeneratedValue(generator = "UUID")
     @Column(name = "id", nullable = false,unique = true)
     private UUID id;
-    @Column(name="First_name",nullable = false)
+    @Column(name="first_name",nullable = false)
     private String firstname;
-    @Column(name="Second_name",nullable = false)
+    @Column(name="second_name",nullable = false)
     private String secondname;
-    @Column(name="Gender",nullable = false)
+    @Column(name="gender",nullable = false)
     private String gender;
-    @Column(name="Dob",nullable = false)
+    @Column(name="dob",nullable = false)
     private Date Dob;
-    @Column(name="Role")
+    @Column(name="role")
     private String role;
+    @Column(name="avatar")
+    private String avatarContent;
     public UserAccountDetail(){}
 
     public UserAccountDetail(UUID id,
@@ -31,21 +34,24 @@ public class UserAccountDetail {
                              String secondname,
                              String gender,
                              Date dob,
-                             String role) {
+                             String role,
+                             String avatarContent) {
         this.id = id;
         this.firstname = firstname;
         this.secondname = secondname;
         this.gender = gender;
         Dob = dob;
         this.role = role;
+        this.avatarContent = avatarContent;
     }
 
-    public UserAccountDetail(String firstname, String secondname, String gender, Date dob, String role) {
+    public UserAccountDetail(String firstname, String secondname, String gender, Date dob, String role,String avatarContent) {
         this.firstname = firstname;
         this.secondname = secondname;
         this.gender = gender;
         Dob = dob;
         this.role = role;
+        this.avatarContent=avatarContent;
     }
 
     public UUID getId() {
@@ -96,5 +102,13 @@ public class UserAccountDetail {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAvatarContent() {
+        return avatarContent;
+    }
+
+    public void setAvatarContent(String avatarContent) {
+        this.avatarContent = avatarContent;
     }
 }

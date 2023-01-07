@@ -9,17 +9,17 @@ import a1.repository.entity.OrderEntity;
 import a1.service.OrderService;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/order")
+//@RestController
+//@RequestMapping("/api/order")
 public class OrderController {
 	
-	@Autowired 
-	private OrderService orderService;
-	
-	public List<OrderEntity> findAll(){
-		List<OrderEntity> results = orderService.findAll();
-		return results;
-	} 
+//	@Autowired 
+//	private OrderService orderService;
+//	
+//	public List<OrderEntity> findAll(){
+//		List<OrderEntity> results = orderService.findAll();
+//		return results;
+//	} 
 	
 //	public OrderEntity findById() {
 //		return null;

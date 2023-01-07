@@ -50,7 +50,7 @@ public class CartItemService {
 	}
 	
 	public List<CartItemEntity> listCartItems(UserEntity userEntity) {
-		return cartItemRepo.findByCustomer(userEntity);
+		return cartItemRepo.findByUser(userEntity);
 	}
 	
 	public CartItemDTO findByUserAndItem(UserDTO user, Long itemId) {
@@ -81,7 +81,7 @@ public class CartItemService {
 		cartItemRepo.deleteByUserAndItem(userEntity.getId(), itemId);
 	}
 
-	public void deleteByCustomer(UserEntity userEntity) {
+	public void deleteByUser(UserEntity userEntity) {
 		cartItemRepo.deleteByUser(userEntity.getId());
 	}
 	

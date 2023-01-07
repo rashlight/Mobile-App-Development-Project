@@ -10,6 +10,6 @@ public interface UserRepository extends JpaRepository<UserEntity,Long>, CrudRepo
 
 	UserEntity findByName(String name);
 
-	//void update(UserEntity userEntity);
+	
 
 }

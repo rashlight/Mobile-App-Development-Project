@@ -59,10 +59,10 @@ public class CartItemEntity {
 		this.quantity = quantity;
 	}
 	
-	@Transient
-	public float getSubtotal() {
-		return item.getPrice() * quantity;
-	}
+//	@Transient
+//	public float getSubtotal() {
+//		return item.getPrice() * quantity;
+//	}
 	
 
 }

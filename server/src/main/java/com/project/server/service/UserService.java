@@ -11,7 +11,7 @@ public interface UserService<T> {
     T findbyToken(String token);
     void save(T model);
     void remove(UUID id);
-    T addNewUser(T user);
+    String addNewUser(T user);
 
     T findbyPassword(String username,String password);
 }

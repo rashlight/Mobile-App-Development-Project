@@ -90,11 +90,12 @@ public class UserserviceImpl implements UserService<UserModel> {
     }
 
     @Override
-    public UserModel addNewUser(UserModel user) {
+    public String addNewUser(UserModel user) {
+        String token = UUID.randomUUID().toString();
         UserLoginDetail loginDetail = new UserLoginDetail(user.getUsername(),
                                                             user.getPassword(),
                                                           user.getEmail(),
-                                                   user.getToken(),
+                                                        token,
                                                    user.getTokenGeneratedDate());
         UserAccountDetail accountDetail = new UserAccountDetail(user.getFirstname(),
                                                                 user.getSecondname(),
@@ -105,7 +106,7 @@ public class UserserviceImpl implements UserService<UserModel> {
         userRepository.save(new_user);
         userLoginRepository.save(loginDetail);
         userAccountRepository.save(accountDetail);
-        return user;
+        return token;
     }
 
     @Override

@@ -1,20 +1,14 @@
-package a1.service;
+package com.project.server.service;
 
+import com.project.server.dto.CheckoutInfo;
+import com.project.server.entity.*;
+import com.project.server.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import a1.model.CheckoutInfo;
-import a1.repository.OrderRepository;
-import a1.repository.entity.CartItemEntity;
-import a1.repository.entity.ItemEntity;
-import a1.repository.entity.OrderDetailEntity;
-import a1.repository.entity.OrderEntity;
-import a1.repository.entity.UserEntity;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
 
 @Service
 public class OrderService {
@@ -22,7 +16,7 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepo;
 	
-	public OrderEntity createOrder(UserEntity userEntity,List<CartItemEntity> cartItems, CheckoutInfo checkoutInfo) {
+	public OrderEntity createOrder(User userEntity, List<CartItemEntity> cartItems, CheckoutInfo checkoutInfo) {
 		OrderEntity newOrder = new OrderEntity();
 		//newOrder.setOrderTime(new Date());
 		

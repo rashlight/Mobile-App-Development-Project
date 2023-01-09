@@ -2,23 +2,17 @@ package com.project.server.controller;
 
 
 import com.project.server.dto.UserModel;
-import com.project.server.entity.User;
 import com.project.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class UserController {
     @Autowired
-    UserService<UserModel> userService;
+    UserService userService;
 //    @GetMapping("/api/users")
 //    public List<UserModel> listUser(){
 //        List<UserModel> users = userService.findAll();

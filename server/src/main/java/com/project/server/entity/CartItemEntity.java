@@ -19,7 +19,7 @@ public class CartItemEntity {
 	
 	@ManyToOne
     @JoinColumn(name = "user_id") 
-	private UserEntity user;
+	private User user;
 	
 	@ManyToOne
     @JoinColumn(name = "item_id") 
@@ -35,11 +35,11 @@ public class CartItemEntity {
 		this.id = id;
 	}
 
-	public UserEntity getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

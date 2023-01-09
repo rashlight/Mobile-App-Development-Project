@@ -1,26 +1,26 @@
 package com.project.server.entity;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 import java.sql.Time;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "UserLoginDetail")
 public class UserLoginDetail {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(name = "id", nullable = false,unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(name = "id",columnDefinition = "VARCHAR(255)", nullable = false,unique = true)
     private UUID id;
-    @Column(name="Username",nullable = false,unique = true)
+    @Column(name="username",nullable = false,unique = true)
     private String username;
-    @Column(name="Password",nullable = false)
+    @Column(name="password",nullable = false)
     private String password;
-    @Column(name="Email",nullable = false)
+    @Column(name="email",nullable = false)
     private String email;
     @Column(name="Token",nullable = false,unique = true)
     private String Token;

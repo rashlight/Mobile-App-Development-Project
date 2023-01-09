@@ -1,6 +1,8 @@
 package com.project.server.entity;
 
-import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.UUID;
@@ -9,8 +11,9 @@ import java.util.UUID;
 @Table(name = "User")
 public class User {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(name = "user_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(name = "user_id",columnDefinition = "VARCHAR(255)", nullable = false)
     private UUID userid;
     @Column(name = "created_date",nullable = false)
     private Date createddate;

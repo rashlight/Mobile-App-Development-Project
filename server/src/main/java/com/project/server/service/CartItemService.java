@@ -5,17 +5,15 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+
+import com.project.server.dto.*;
+import com.project.server.entity.*;
+import com.project.server.repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import a1.model.CartItemDTO;
-import a1.model.ItemDTO;
-import a1.model.UserDTO;
-import a1.repository.CartItemRepository;
-import a1.repository.ItemRepository;
-import a1.repository.entity.CartItemEntity;
-import a1.repository.entity.ItemEntity;
-import a1.repository.entity.UserEntity;
+
 
 @Service
 @Transactional
@@ -27,7 +25,7 @@ public class CartItemService {
 	@Autowired
 	private ItemRepository itemRepo;
 	
-	public Integer addProduct(Long itemId, Integer quantity, UserEntity user) {
+	public Integer addProduct(Long itemId, Integer quantity, User user) {
 		Integer updatedQuantity = quantity;
 		ItemEntity item = new ItemEntity(itemId);
 		
@@ -49,40 +47,37 @@ public class CartItemService {
 		return updatedQuantity;
 	}
 	
-	public List<CartItemEntity> listCartItems(UserEntity userEntity) {
+	public List<CartItemEntity> listCartItems(User userEntity) {
 		return cartItemRepo.findByUser(userEntity);
 	}
 	
-	public CartItemDTO findByUserAndItem(UserDTO user, Long itemId) {
-		UserEntity userEntity = new UserEntity();
-		userEntity.setName(user.getName());
-		userEntity.setEmail(user.getEmail());
-		userEntity.setId(user.getId());
+	public CartItemDTO findByUserAndItem(User user, Long itemId) {
+
 		ItemEntity itemEntity = new ItemEntity(itemId);
 		//userEntity.set
-		CartItemEntity cartEntity = cartItemRepo.findByUserAndItem(userEntity, itemEntity);
+		CartItemEntity cartEntity = cartItemRepo.findByUserAndItem(user, itemEntity);
 		CartItemDTO cartDTO = new CartItemDTO();
 		cartDTO.setId(cartEntity.getId());
 		cartDTO.setQuantity(cartEntity.getQuantity());
 		cartDTO.setItemId(cartEntity.getItem().getId());
-		cartDTO.setUserId(cartEntity.getUser().getId());
+		cartDTO.setUserId(cartEntity.getUser().getUserid());
 		return cartDTO;
 	}
 	
-	public float updateQuantity(Long itemId, Integer quantity, UserEntity user) {
-		cartItemRepo.updateQuantity(quantity, user.getId(), itemId);
+	public float updateQuantity(Long itemId, Integer quantity, User user) {
+		cartItemRepo.updateQuantity(quantity, user.getUserid(), itemId);
 		ItemEntity itemEntity = itemRepo.findById(itemId).get();
 		float subtotal = itemEntity.getPrice() * quantity;
 		return subtotal;
 	}
 	
 	
-	public void removeProduct(Long itemId, UserEntity userEntity) {
-		cartItemRepo.deleteByUserAndItem(userEntity.getId(), itemId);
+	public void removeProduct(Long itemId, User userEntity) {
+		cartItemRepo.deleteByUserAndItem(userEntity.getUserid(), itemId);
 	}
 
-	public void deleteByUser(UserEntity userEntity) {
-		cartItemRepo.deleteByUser(userEntity.getId());
+	public void deleteByUser(User userEntity) {
+		cartItemRepo.deleteByUser(userEntity.getUserid());
 	}
 	
 	

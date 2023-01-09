@@ -1,19 +1,21 @@
 package com.project.server.entity;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+
 
 import java.sql.Date;
-import java.util.Base64;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "UserAccountDetail")
 public class UserAccountDetail {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(name = "id", nullable = false,unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(name = "id",columnDefinition = "VARCHAR(255)", nullable = false,unique = true)
     private UUID id;
     @Column(name="first_name",nullable = false)
     private String firstname;

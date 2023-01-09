@@ -1,12 +1,11 @@
-package a1.service;
+package com.project.server.service;
 
+import com.project.server.dto.*;
+import com.project.server.entity.*;
+import com.project.server.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
-
-import a1.model.ItemDTO;
-import a1.repository.ItemRepository;
-import a1.repository.entity.ItemEntity;
 
 import java.util.ArrayList;
 
@@ -33,6 +32,7 @@ public class ItemService {
 	public void addItem(ItemDTO item) {
 		ItemEntity itemEntity = new ItemEntity();
 		itemEntity.setName(item.getName());
+		itemEntity.setPrice(item.getPrice());
 		itemRepo.save(itemEntity);
 	}
 	

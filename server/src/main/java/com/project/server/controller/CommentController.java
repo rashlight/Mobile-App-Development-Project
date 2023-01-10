@@ -31,30 +31,30 @@ public class CommentController {
 	@Autowired
 	private UserRepository userRepository;
 	
-//	@GetMapping
-//	public List<CommentDTO> findAll(@RequestParam(value="token")String token,
-//			                        @RequestParam(value="token")Long itemId ){
-//		UserModel userModel = userService.findbyToken(token);
-//		User user = userRepository.getOne(userModel.getUserid());
-//		List<CommentDTO> results = commentService.findAll(itemId, user);
-//		return results;
-//	}
+	@GetMapping
+	public List<CommentDTO> findAll(@RequestParam(value="token")String token,
+			                        @RequestParam(value="itemId")Long itemId ){
+		UserModel userModel = userService.findbyToken(token);
+		User user = userRepository.getOne(userModel.getUserid());
+		List<CommentDTO> results = commentService.findAll(itemId, user);
+		return results;
+	}
 	
-	//@PostMapping
+	@PostMapping
 //	public CommentDTO addComment(@RequestBody String token,
 //			@RequestBody String description,
 //			@RequestBody Long itemId,
 //			@RequestBody float rating) {
-//	public CommentDTO addComment(@RequestBody Map<String,Object> params) {
-//		Object token = (String) params.get("token");
-//		Object description = (String) params.get("description");
-//		Object rating = (float) params.get("rating");
-//		Object itemId = (Long) params.get("itemId");
-//		//float rating = (float) params.get("rating");
-//		UserModel userModel = userService.findbyToken(token.toString());
-//		User user = userRepository.getOne(userModel.getUserid());
-//		CommentDTO comment = commentService.addComment(itemId, user, rating, description);
-//		return comment;
-//	}
+	public CommentDTO addComment(@RequestBody Map<String,Object> params) {
+		Object token = params.get("token");
+		Object description = params.get("description");
+		Object rating = params.get("rating");
+		Object itemId = params.get("itemId");
+		//float rating = (float) params.get("rating");
+		UserModel userModel = userService.findbyToken(token.toString());
+		User user = userRepository.getOne(userModel.getUserid());
+		CommentDTO comment = commentService.addComment(Long.parseLong(itemId.toString()), user, Float.valueOf(rating.toString()), description.toString());
+		return comment;
+	}
 
 }

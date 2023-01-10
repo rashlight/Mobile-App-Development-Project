@@ -23,6 +23,8 @@ public class CommentService {
 		CommentEntity commentEntity = new CommentEntity();
 		commentEntity.setDescription(description);
 		commentEntity.setRating(rating);
+		commentEntity.setItem(item);
+		commentEntity.setUser(user);
 		commentRepo.save(commentEntity);
 		//commentEntity = commentRepo.findByUserAndItem(user, item);
 		CommentDTO commentDTO = new CommentDTO();

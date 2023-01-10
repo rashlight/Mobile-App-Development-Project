@@ -21,7 +21,6 @@ public class CommentDTO {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	
-	
+
 
 }

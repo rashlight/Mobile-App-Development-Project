@@ -56,5 +56,11 @@ public class CommentController {
 		CommentDTO comment = commentService.addComment(Long.parseLong(itemId.toString()), user, Float.valueOf(rating.toString()), description.toString());
 		return comment;
 	}
+	
+	@GetMapping("/average")
+	public float getAverageRating() {
+		float result = commentService.getAverageRating();
+		return result;         
+	}
 
 }

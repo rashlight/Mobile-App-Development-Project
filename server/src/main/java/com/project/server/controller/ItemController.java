@@ -29,19 +29,19 @@ public class ItemController {
 	}
 	
 	@PostMapping
-	public String createUser(@RequestBody ItemDTO item) {
+	public String createItem(@RequestBody ItemDTO item) {
 		itemService.addItem(item);
 		return "Added successfully";
 	}
 	
 	@DeleteMapping("/{id}")
-	public String deleteUser(@PathVariable(name="id") Long id) {
+	public String deleteItem(@PathVariable(name="id") Long id) {
 		itemService.deleteById(id);
 		return "Delete successfully";
 	}
 	
 	@PutMapping
-	public String updateUser(@RequestBody ItemDTO item) {
+	public String updateItem(@RequestBody ItemDTO item) {
 		itemService.updateItem(item);
 		return "Edit successfully";
 	}

@@ -46,5 +46,16 @@ public class CommentService {
 		return results;
 		
 	}
+	
+	public float getAverageRating() {
+		List<CommentEntity> commentEntities = commentRepo.findAll();
+		float result = 0;
+		int count = 0;
+		for(CommentEntity i: commentEntities) {
+			result += i.getRating();
+			count++;
+		}
+		return result/count;
+	}
 
 }

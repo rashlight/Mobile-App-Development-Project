@@ -24,6 +24,9 @@ public class ItemService {
 			ItemDTO item = new ItemDTO();
 			item.setId(i.getId());
 			item.setName(i.getName());
+			item.setImage(i.getImage());
+			item.setTime(i.getTime());
+			item.setPrice(i.getPrice());
 			results.add(item);
 		}
 		return results;
@@ -33,6 +36,8 @@ public class ItemService {
 		ItemEntity itemEntity = new ItemEntity();
 		itemEntity.setName(item.getName());
 		itemEntity.setPrice(item.getPrice());
+		itemEntity.setImage(item.getImage());
+		itemEntity.setTime(item.getTime());
 		itemRepo.save(itemEntity);
 	}
 	

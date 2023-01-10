@@ -8,6 +8,8 @@ public class ItemDTO {
 	private int price;
 	
 	private String image;
+	
+	private Integer time;
 
 	public int getPrice() {
 		return price;
@@ -39,6 +41,14 @@ public class ItemDTO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
 	}
 	
 	

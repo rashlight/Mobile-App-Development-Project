@@ -24,6 +24,8 @@ public class ItemEntity {
 	
 	private String image;
 	
+	private Integer time;
+	
 	 @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
 	 private List<CartItemEntity> cartItem = new ArrayList<>();
 	 
@@ -76,6 +78,15 @@ public class ItemEntity {
 	public void setCartItem(List<CartItemEntity> cartItem) {
 		this.cartItem = cartItem;
 	}
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
+	}
+	
 	
 	
 

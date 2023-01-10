@@ -58,8 +58,8 @@ public class CommentController {
 	}
 	
 	@GetMapping("/average")
-	public float getAverageRating() {
-		float result = commentService.getAverageRating();
+	public float getAverageRating(@RequestParam(value="itemId")Long itemId ) {
+		float result = commentService.getAverageRating(itemId);
 		return result;         
 	}
 

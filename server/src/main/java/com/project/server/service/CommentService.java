@@ -47,8 +47,9 @@ public class CommentService {
 		
 	}
 	
-	public float getAverageRating() {
-		List<CommentEntity> commentEntities = commentRepo.findAll();
+	public float getAverageRating(Long itemId) {
+		ItemEntity item = new ItemEntity(itemId);
+		List<CommentEntity> commentEntities = commentRepo.findByItem(item);
 		float result = 0;
 		int count = 0;
 		for(CommentEntity i: commentEntities) {

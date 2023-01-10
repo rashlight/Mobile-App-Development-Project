@@ -55,7 +55,6 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -63,19 +62,18 @@
             android:layout_marginBottom="12dp"
             android:layout_marginLeft="@dimen/space24"
             android:layout_marginRight="@dimen/space24"
-            android:layout_below="@+id/text_login"
             app:boxStrokeColor="@color/white_trans"
-            android:hint="Email"
+            android:hint="Username"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -86,6 +84,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
@@ -93,7 +92,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/textButton"
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space24"
@@ -101,6 +100,12 @@
             android:backgroundTint="@color/primary_trans"
             android:textColor="@color/white_trans"
             android:onClick="tryLogin"/>
+
+        <ProgressBar
+            android:id="@+id/process_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <!-- Signup -->
@@ -159,7 +164,6 @@
             android:clipChildren="false">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_name_first"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
@@ -171,6 +175,7 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp" />
@@ -178,7 +183,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_name_second"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -190,6 +194,7 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_second_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"/>
@@ -199,15 +204,15 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:layout_marginLeft="@dimen/space24"
             android:layout_marginRight="@dimen/space24"
-            android:hint="Email">
+            android:hint="Username">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_username_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"/>
@@ -215,7 +220,6 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_password_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -226,6 +230,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_password_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
@@ -260,13 +265,19 @@
     </LinearLayout>
 
         <Button
-            android:id="@+id/signupButton"
+            android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"
             android:backgroundTint="@color/primary_trans"
             android:textColor="@color/white_trans"
             android:onClick="trySignup"/>
+
+        <ProgressBar
+            android:id="@+id/process_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </RelativeLayout>

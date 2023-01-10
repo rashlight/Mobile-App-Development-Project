@@ -22,6 +22,7 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
     Toolbar toolbar;
+
     protected void setVars() {
 
     }

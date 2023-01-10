@@ -11,6 +11,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -22,8 +23,19 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.edu.usth.ufood.api.APIClient;
+import vn.edu.usth.ufood.api.APISchema;
+import vn.edu.usth.ufood.api.UserTokenResult;
+import vn.edu.usth.ufood.utils.StubData;
 
 public class Login extends BaseActivity {
 
@@ -34,7 +46,19 @@ public class Login extends BaseActivity {
     private View signupLayout;
     private View tosLayout;
     private TextView tosText;
+    private TextInputEditText inputUsername;
+    private TextInputEditText inputPassword;
+    private TextInputEditText inputFirstName;
+    private TextInputEditText inputLastName;
+    private TextInputEditText inputUsernameSignup;
+    private TextInputEditText inputPasswordSignup;
+    private View loginButton;
+    private View signupButton;
+    private View progressLogin;
+    private View progressSignup;
+    private CheckBox tosCheckBox;
     private AlertDialog.Builder builder;
+    private APISchema apiSchema;
 
     @Override
     public void onBackPressed() {
@@ -51,6 +75,21 @@ public class Login extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        inputUsername = findViewById(R.id.input_username);
+        inputPassword = findViewById(R.id.input_password);
+        inputFirstName = findViewById(R.id.input_first_name);
+        inputLastName = findViewById(R.id.input_second_name);
+        inputUsernameSignup = findViewById(R.id.input_username_signup);
+        inputPasswordSignup = findViewById(R.id.input_password_signup);
+
+        loginButton = findViewById(R.id.login_button);
+        signupButton = findViewById(R.id.signup_button);
+
+        progressLogin = findViewById(R.id.process_login);
+        progressSignup = findViewById(R.id.process_signup);
+
+        apiSchema = APIClient.getRetrofitInstance().create(APISchema.class);
 
         loginLayout = findViewById(R.id.loginPanel);
         signupLayout = findViewById(R.id.signupPanel);
@@ -157,11 +196,37 @@ public class Login extends BaseActivity {
     }
 
     public void tryLogin(View view) {
-        new Handler().post(() -> {
-            startActivity(new Intent(Login.this, Main.class));
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            finish();
+        String username = inputUsername.getText().toString();
+        String password = inputPassword.getText().toString();
+
+        loginButton.setVisibility(View.GONE);
+        progressLogin.setVisibility(View.VISIBLE);
+
+        Call<UserTokenResult> call = apiSchema.login(username, password);
+        call.enqueue(new Callback<UserTokenResult>() {
+            @Override
+            public void onResponse(Call<UserTokenResult> call, Response<UserTokenResult> response) {
+                new Handler().post(() -> {
+                    startActivity(new Intent(Login.this, Main.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                });
+            }
+
+            @Override
+            public void onFailure(Call<UserTokenResult> call, Throwable t) {
+                call.cancel();
+                showDialogOK(R.layout.dialog_text, "Login failed", "Verify that username and password is correct or check your internet connection, then try again.", new Runnable() {
+                    @Override
+                    public void run() {
+                        loginButton.setVisibility(View.VISIBLE);
+                        progressLogin.setVisibility(View.GONE);
+                    }
+                });
+            }
         });
+
+
     }
 
     public void trySignup(View view) {

@@ -10,6 +10,8 @@ public class ItemDTO {
 	private String image;
 	
 	private Integer time;
+	
+	private float rating;
 
 	public int getPrice() {
 		return price;
@@ -49,6 +51,14 @@ public class ItemDTO {
 
 	public void setTime(Integer time) {
 		this.time = time;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 	
 	

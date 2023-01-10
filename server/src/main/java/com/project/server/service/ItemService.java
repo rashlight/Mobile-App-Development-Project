@@ -17,6 +17,9 @@ public class ItemService {
 	@Autowired
 	private ItemRepository itemRepo;
 	
+	@Autowired
+	private CommentService commentService;
+	
 	public List<ItemDTO> findAll(){
 		List<ItemDTO> results = new ArrayList<>();
 		List<ItemEntity> itemEntities = itemRepo.findAll();
@@ -27,6 +30,7 @@ public class ItemService {
 			item.setImage(i.getImage());
 			item.setTime(i.getTime());
 			item.setPrice(i.getPrice());
+			item.setRating(commentService.getAverageRating(i.getId()));			
 			results.add(item);
 		}
 		return results;

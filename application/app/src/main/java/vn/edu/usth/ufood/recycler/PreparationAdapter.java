@@ -46,9 +46,9 @@ public class PreparationAdapter extends SelectableAdapter<PreparationAdapter.Vie
         viewHolder.tvStep.setText(mArrayList.get(position).getStep());
         if (isSelected(position)) {
             viewHolder.done.setVisibility(View.VISIBLE);
-            viewHolder.tvStep.setTextColor(mContext.getResources().getColor(R.color.colorTextGrey));
+            viewHolder.tvStep.setTextColor(mContext.getResources().getColor(R.color.secondary));
         }else{
-            viewHolder.tvStep.setTextColor(mContext.getResources().getColor(R.color.colorTextDark));
+            viewHolder.tvStep.setTextColor(mContext.getResources().getColor(R.color.secondary_dark));
             viewHolder.tvNumber.setText(mArrayList.get(position).getNumber());
             viewHolder.done.setVisibility(View.GONE);
         }

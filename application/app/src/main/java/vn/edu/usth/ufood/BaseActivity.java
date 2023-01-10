@@ -1,18 +1,22 @@
 package vn.edu.usth.ufood;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
@@ -36,9 +40,64 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(burger);
     }
-    public void changeStatusBarColor() {
+    public void changeStatusBarColor(int id) {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPink));
+        window.setStatusBarColor(getResources().getColor(id));
+    }
+
+    public void showDialogEmpty(int id, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogLayout = LayoutInflater.from(this).inflate(id, (ViewGroup) getWindow().getDecorView().getRootView(), false);
+        TextView dialogText = dialogLayout.findViewById(R.id.dialog_content);
+        dialogText.setText(message);
+        builder.setView(dialogLayout);
+        builder.show();
+    }
+
+    public void showDialogOK(int id, String title, String message, Runnable onOK) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        View dialogLayout = LayoutInflater.from(this).inflate(id, (ViewGroup) getWindow().getDecorView().getRootView(), false);
+        TextView dialogText = dialogLayout.findViewById(R.id.dialog_content);
+        dialogText.setText(message);
+        builder.setView(dialogLayout);
+
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onOK.run();
+            }
+        });
+
+        builder.show();
+    }
+
+    public void showDialogOkCancel(int id, String title, String message, Runnable onOK, Runnable onCancel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        View dialogLayout = LayoutInflater.from(this).inflate(id, (ViewGroup) getWindow().getDecorView().getRootView(), false);
+        TextView dialogText = dialogLayout.findViewById(R.id.dialog_content);
+        dialogText.setText(message);
+        builder.setView(dialogLayout);
+
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onOK.run();
+            }
+        });
+
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onCancel.run();
+            }
+        });
+
+        builder.show();
     }
 }

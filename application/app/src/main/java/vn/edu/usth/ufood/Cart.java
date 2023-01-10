@@ -1,31 +1,18 @@
 package vn.edu.usth.ufood;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.usth.ufood.recycler.CartAdapter;
-import vn.edu.usth.ufood.recycler.CommentsAdapter;
 import vn.edu.usth.ufood.utils.StubData;
 
 public class Cart extends BaseActivity {
@@ -38,10 +25,10 @@ public class Cart extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        setupToolbar(R.id.toolbar, "Cart", R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_arrow_back_pink);
+        setupToolbar(R.id.toolbar, "Cart", R.color.primary, R.color.white_trans, R.drawable.ic_arrow_back_pink);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        changeStatusBarColor();
+        // changeStatusBarColor(R.color.primary);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_pink);

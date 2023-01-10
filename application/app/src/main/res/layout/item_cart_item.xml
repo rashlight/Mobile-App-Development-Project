@@ -16,7 +16,7 @@
         android:paddingLeft="@dimen/space8"
         android:paddingTop="@dimen/space8"
         android:text="ITEM NAME"
-        android:textColor="@color/colorTextDark"
+        android:textColor="@color/secondary_dark"
         android:textSize="20sp"
         android:textAppearance="@style/SemiBold"
         android:layout_toRightOf="@id/iv_picture"/>

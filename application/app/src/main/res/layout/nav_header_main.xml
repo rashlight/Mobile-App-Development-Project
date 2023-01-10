@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/space8"
-        android:text="MARCO TOMASINI"
+        android:text="USERNAME"
         android:textColor="@android:color/white"
         android:textSize="@dimen/h1"
         android:textAppearance="@style/SemiBold"/>

@@ -162,7 +162,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="@dimen/space8"
-                        android:background="@color/colorPink"/>
+                        android:background="@color/primary"/>
                     <Button
                         android:id="@+id/tv_more"
                         android:layout_width="wrap_content"
@@ -187,7 +187,7 @@
                     android:layout_marginTop="8dp"
                     android:text="ABOUT ITEM NAME"
                     android:textSize="@dimen/h2"
-                    android:textColor="@color/colorTextDark"
+                    android:textColor="@color/secondary_dark"
                     android:textAppearance="@style/SemiBold"/>
                 <TextView
                     android:id="@+id/tv_desc"
@@ -215,7 +215,7 @@
                     android:layout_marginTop="8dp"
                     android:text="COMMENTS"
                     android:textSize="18sp"
-                    android:textColor="@color/colorTextDark"
+                    android:textColor="@color/secondary_dark"
                     android:textAppearance="@style/SemiBold"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerComment"
@@ -260,8 +260,8 @@
                         android:lines="2"
                         android:hint="Type your comment here…"
                         android:textSize="@dimen/h3"
-                        android:textColor="@color/colorTextDark"
-                        android:textColorHint="@color/colorTextGrey"
+                        android:textColor="@color/secondary_dark"
+                        android:textColorHint="@color/secondary"
                         android:textAppearance="@style/Regular"
                         android:background="@null"/>
                 </RelativeLayout>

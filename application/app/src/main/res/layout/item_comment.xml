@@ -14,7 +14,7 @@
         android:layout_alignStart="@id/ratingBar"
         android:layout_marginStart="3dp"
         android:text="USERNAME"
-        android:textColor="@color/colorTextDark"
+        android:textColor="@color/secondary_dark"
         android:textSize="16sp"
         android:textAppearance="@style/SemiBold"/>
     <RatingBar
@@ -38,7 +38,7 @@
         android:layout_marginStart="@dimen/space8"
         android:layout_toEndOf="@id/tv_username"
         android:layout_alignBaseline="@id/tv_username"
-        android:textColor="@color/colorTextGrey"
+        android:textColor="@color/secondary"
         android:textSize="12sp"
         android:textAppearance="@style/Regular"/>
     <TextView

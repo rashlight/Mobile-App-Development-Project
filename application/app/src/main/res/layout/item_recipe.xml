@@ -26,17 +26,19 @@
         android:layout_marginTop="@dimen/space8"
         android:text="RECIPES"
         android:textSize="@dimen/h3"
-        android:textColor="@color/colorTextDark"
+        android:textColor="@color/secondary_dark"
         android:gravity="center_horizontal"
         style="@style/SemiBold"/>
     <TextView
+        android:scaleX=".75"
+        android:scaleY=".75"
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="@dimen/space4"
         android:text="1h 20'"
         android:textSize="@dimen/h2"
-        android:textColor="@color/colorTextGrey"
+        android:textColor="@color/secondary"
         android:textAppearance="@style/Regular"
         app:drawableLeftCompat="@drawable/ic_baseline_money_24" />
 </LinearLayout>

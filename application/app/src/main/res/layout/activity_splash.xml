@@ -12,7 +12,7 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPinkTrans"/>
+        android:background="@color/primary_trans"/>
 
     <LinearLayout
         android:id="@+id/splashPanel"
@@ -38,74 +38,6 @@
             android:textAppearance="@style/Regular"
             android:textColor="@android:color/white"
             android:textSize="@dimen/h1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/loginPanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/text_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/source_sans_pro"
-            android:text="Welcome back!"
-            android:textAppearance="@style/Regular"
-            android:textColor="@color/colorPinkTrans"
-            android:textSize="40sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="@dimen/space24"
-            android:layout_marginRight="@dimen/space24"
-            android:layout_below="@+id/text_login"
-            app:boxStrokeColor="@color/colorWhiteTrans"
-            android:hint="Email"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginLeft="@dimen/space24"
-            android:layout_marginRight="@dimen/space24"
-            android:hint="Password"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:inputType="textPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/textButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:backgroundTint="@color/colorPinkTrans"
-            android:textColor="@color/colorWhiteTrans"
-            android:onClick="tryLogin"/>
     </LinearLayout>
 
 

@@ -1,5 +1,9 @@
 package vn.edu.usth.ufood;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -37,7 +41,7 @@ public class Main extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupToolbar(R.id.toolbar, this.getResources().getString(R.string.app_name), R.color.colorPink, R.color.colorWhiteTrans, R.drawable.ic_burger);
+        setupToolbar(R.id.toolbar, this.getResources().getString(R.string.app_name), R.color.primary, R.color.white_trans, R.drawable.ic_burger);
 
         FragmentTransaction ft;
         FragmentHome fragmentHome = new FragmentHome();
@@ -54,11 +58,11 @@ public class Main extends BaseActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Menu m = navigationView.getMenu();
-        for (int i=0; i<m.size(); i++) {
+        for (int i=0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
             SubMenu subMenu = mi.getSubMenu();
             if (subMenu != null && subMenu.size() >0 ) {
-                for (int j=0; j <subMenu.size();j++) {
+                for (int j=0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -91,6 +95,7 @@ public class Main extends BaseActivity
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -119,7 +124,15 @@ public class Main extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    public void triggerRebirth() {
+        Intent intent = new Intent(this, Splash.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+        ((Activity) this).finish();
+
+        Runtime.getRuntime().exit(0);
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -134,6 +147,19 @@ public class Main extends BaseActivity
             Toast.makeText(this, "This feature is not available.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.setting) {
             Toast.makeText(this, "This feature is not available.", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.logout) {
+            showDialogOkCancel(R.layout.dialog_text, "", "Are you sure you want to logout?",
+            new Runnable() {
+                @Override
+                public void run() {
+                    triggerRebirth();
+                }
+            }, new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

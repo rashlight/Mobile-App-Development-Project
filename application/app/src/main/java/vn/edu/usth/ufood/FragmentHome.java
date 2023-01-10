@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.support.v4.os.IResultReceiver;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +23,6 @@ import vn.edu.usth.ufood.utils.StubData;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FragmentHome extends Fragment{
     private List<ItemRecipe> itemList = new ArrayList<>();
@@ -46,8 +44,8 @@ public class FragmentHome extends Fragment{
         ((Main) requireActivity()).setupToolbar(
                 R.id.toolbar,
                 getTimestampText() + ", " + StubData.StubUser.getFirstName(),
-                R.color.colorPink,
-                R.color.colorWhiteTrans,
+                R.color.primary,
+                R.color.white_trans,
                 R.drawable.ic_burger
         );
 

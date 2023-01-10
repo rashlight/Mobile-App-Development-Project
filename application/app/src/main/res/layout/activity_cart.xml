@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Checkout"
-        android:backgroundTint="@color/colorPinkTrans"
-        android:textColor="@color/colorWhiteTrans"
+        android:backgroundTint="@color/primary_trans"
+        android:textColor="@color/white_trans"
         android:layout_marginTop="?actionBarSize"
         android:onClick="checkOut" />
 

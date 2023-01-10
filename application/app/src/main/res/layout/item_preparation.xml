@@ -9,7 +9,7 @@
         android:layout_height="32dp"
         android:textSize="@dimen/h2"
         android:gravity="center"
-        android:textColor="@color/colorTextGrey"
+        android:textColor="@color/secondary"
         android:textAppearance="@style/Regular"
         android:background="@drawable/bg_number"/>
     <ImageView

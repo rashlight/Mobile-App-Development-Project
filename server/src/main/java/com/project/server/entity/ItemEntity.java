@@ -22,6 +22,8 @@ public class ItemEntity {
 	
 	private String name;
 	
+	private String image;
+	
 	 @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
 	 private List<CartItemEntity> cartItem = new ArrayList<>();
 	 
@@ -57,6 +59,22 @@ public class ItemEntity {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public List<CartItemEntity> getCartItem() {
+		return cartItem;
+	}
+
+	public void setCartItem(List<CartItemEntity> cartItem) {
+		this.cartItem = cartItem;
 	}
 	
 	

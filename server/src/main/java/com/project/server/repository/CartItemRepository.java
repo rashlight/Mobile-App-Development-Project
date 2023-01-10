@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CartItemRepository extends CrudRepository<CartItemEntity, Long>,JpaRepository<CartItemEntity,Long>{
 	
-	public List<CartItemEntity> findByUser(User user);
+    List<CartItemEntity> findByUser(User user);
 	
 	CartItemEntity findByUserAndItem(User user,ItemEntity item);
 	

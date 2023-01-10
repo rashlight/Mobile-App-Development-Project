@@ -1,5 +1,6 @@
 package com.project.server.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,21 @@ public class CartItemService {
 		cartDTO.setItemId(cartEntity.getItem().getId());
 		cartDTO.setUserId(cartEntity.getUser().getUserid());
 		return cartDTO;
+	}
+	
+	public List<CartItemDTO> findAll(User user){
+		
+		List<CartItemEntity> cartItemEntities = cartItemRepo.findByUser(user);
+		List<CartItemDTO> results = new ArrayList<>();
+		for(CartItemEntity i : cartItemEntities) {
+			CartItemDTO cartDTO = new CartItemDTO();
+			cartDTO.setId(i.getId());
+			cartDTO.setQuantity(i.getQuantity());
+			cartDTO.setItemId(i.getItem().getId());
+			cartDTO.setUserId(i.getUser().getUserid());
+			results.add(cartDTO);
+		}
+		return results;
 	}
 	
 	public float updateQuantity(Long itemId, Integer quantity, User user) {

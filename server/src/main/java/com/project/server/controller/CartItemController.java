@@ -6,6 +6,8 @@ import com.project.server.repository.UserRepository;
 import com.project.server.service.CartItemService;
 import com.project.server.service.UserService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,12 +38,20 @@ public class CartItemController {
 		return updatedQuantity + " item(s) of this product were added to your shopping cart.";
 	}
 
+//	@GetMapping
+//	public CartItemDTO find(@RequestParam(value = "itemId") Long itemId,@RequestParam(value="token")String token) {
+//		UserModel userModel = userService.findbyToken(token);
+//		User user = userRepository.getOne(userModel.getUserid());
+//		CartItemDTO cartItem = cartService.findByUserAndItem(user, itemId);
+//		return cartItem;
+//	}
+	
 	@GetMapping
-	public CartItemDTO find(@RequestParam(value = "itemId") Long itemId,@RequestParam(value="token")String token) {
+	public List<CartItemDTO> findAll(@RequestParam(value="token")String token){
 		UserModel userModel = userService.findbyToken(token);
 		User user = userRepository.getOne(userModel.getUserid());
-		CartItemDTO cartItem = cartService.findByUserAndItem(user, itemId);
-		return cartItem;
+		List<CartItemDTO> results = cartService.findAll(user);
+		return results;
 	}
 
 	@PostMapping("/update/{productId}/{quantity}")

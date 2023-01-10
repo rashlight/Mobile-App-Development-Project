@@ -30,11 +30,11 @@ public class OrderEntity {
 	
 	private float productCost;
 	
-	private float subtotal;
+	private String products;
 	
-	private float tax;
+	//private Integer time;
 	
-	private float total;
+//	private String address;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<OrderDetailEntity> orderDetails = new HashSet<>();
@@ -63,30 +63,7 @@ public class OrderEntity {
 		this.productCost = productCost;
 	}
 
-	public float getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(float subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public float getTax() {
-		return tax;
-	}
-
-	public void setTax(float tax) {
-		this.tax = tax;
-	}
-
-	public float getTotal() {
-		return total;
-	}
-
-	public void setTotal(float total) {
-		this.total = total;
-	}
-
+//
 	public Set<OrderDetailEntity> getOrderDetails() {
 		return orderDetails;
 	}
@@ -94,6 +71,24 @@ public class OrderEntity {
 	public void setOrderDetails(Set<OrderDetailEntity> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+//
+//	public String getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
+
+	public String getProducts() {
+		return products;
+	}
+
+	public void setProducts(String products) {
+		this.products = products;
+	}
+
+	
 	
 	
 	

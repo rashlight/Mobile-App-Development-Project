@@ -1,6 +1,6 @@
 # Mobile App Development API Server
 
-Created by group X
+Created by group 9
 
 ### Application properties file
 Still in Development process so you can modified it as you like then place in resource folder

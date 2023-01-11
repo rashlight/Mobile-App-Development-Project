@@ -3,11 +3,12 @@
 ## Members
 | ID | Name | Contribution |
 | - | - | - |
-| BA9-037 | Nguyễn Hải Long | |
+| BA9-037 | Nguyễn Hải Long | Slide|
 | BI11-004 | Văn Quốc An | Front-end stack |
 | BI11-090 | Phạm Minh Hiếu | Back-end stack |
-| BI11-111 | Hoàng Quang Huy | Front-end |
-| BI11-257 | Lê Đình Thông | Back-end stack |
+| BI11-111 | Hoàng Quang Huy | Back-end stack |
+| BI11-257 | Lê Đình Thông | front-end stack,Slide |
+
 ## Set up for this project
 ### Front-end stack
 - Glide
@@ -16,3 +17,5 @@
 - Material2 Library
 - Desugaring Library
 ### Back-end stack
+- Spring boot 2.4
+- Mysql

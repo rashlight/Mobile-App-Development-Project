@@ -19,3 +19,6 @@
 ### Back-end stack
 - Spring boot 2.4
 - Mysql
+## Documentation
+### Api usage
+- Documentation is include in readme file in [server folder](https://github.com/rashlight/Mobile-App-Development-Project/tree/main/server)

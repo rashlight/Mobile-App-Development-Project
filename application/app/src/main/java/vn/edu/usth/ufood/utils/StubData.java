@@ -1,37 +1,16 @@
 package vn.edu.usth.ufood.utils;
 
+import android.util.Log;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import vn.edu.usth.ufood.api.Item;
+
 public class StubData {
-    public static class LoginCreds {
-        protected String username;
-        protected String password;
-
-        public LoginCreds(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    }
 
     public static class User {
         protected String fullName;
@@ -145,8 +124,6 @@ public class StubData {
         }
 
         public void setRating(float rating) {
-            rating = calculateRatingAvg(this);
-            if (rating < 0.0 || rating > 5.0) throw new IndexOutOfBoundsException("Invalid rating");
             this.rating = rating;
         }
 
@@ -223,6 +200,14 @@ public class StubData {
         return (float) Math.round(total / item.comments.size());
     }
 
+    public static ArrayList<String> getItemIds(ArrayList<Item> items) {
+        ArrayList<String> result = new ArrayList<>();
+        for (Item item : items) {
+            result.add(item.id);
+        }
+        return result;
+    }
+
     public static ArrayList<String> getItemNames(ArrayList<Item> items) {
         ArrayList<String> result = new ArrayList<>();
         for (Item item : items) {
@@ -264,7 +249,7 @@ public class StubData {
     public static ArrayList<Float> getItemRatings(ArrayList<Item> items) {
         ArrayList<Float> result = new ArrayList<>();
         for (Item item : items) {
-            result.add(calculateRatingAvg(item));
+            result.add(item.getRating());
         }
         return result;
     }
@@ -275,6 +260,23 @@ public class StubData {
             result.add(item.getComments());
         }
         return result;
+    }
+
+    public static void setItemsFromAPI(ArrayList<vn.edu.usth.ufood.api.Item> items) {
+        StubItems = new ArrayList<Item>();
+
+        for (vn.edu.usth.ufood.api.Item item: items) {
+            StubItems.add(new Item(
+                    item.getId().toString(),
+                    item.getName(),
+                    Duration.ofSeconds(item.getTime()),
+                    "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/heart-healthy-food-1580231690.jpg",
+                    item.getPrice(),
+                    item.getRating(),
+                    new ArrayList<>(),
+                    new ArrayList<>()
+            ));
+        }
     }
 
     public static ArrayList<Item> StubCart = new ArrayList<>();

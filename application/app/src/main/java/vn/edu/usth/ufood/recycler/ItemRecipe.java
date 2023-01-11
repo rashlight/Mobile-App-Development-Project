@@ -1,12 +1,21 @@
 package vn.edu.usth.ufood.recycler;
 
 public class ItemRecipe {
+    String id;
     String time;
     String recipe;
     String img;
 
     String price;
     float rating;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setTime(String time) {
         this.time = time;

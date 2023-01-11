@@ -76,6 +76,8 @@ public class Login extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        apiSchema = APIClient.getRetrofitInstance().create(APISchema.class);
+
         inputUsername = findViewById(R.id.input_username);
         inputPassword = findViewById(R.id.input_password);
         inputFirstName = findViewById(R.id.input_first_name);
@@ -88,8 +90,6 @@ public class Login extends BaseActivity {
 
         progressLogin = findViewById(R.id.process_login);
         progressSignup = findViewById(R.id.process_signup);
-
-        apiSchema = APIClient.getRetrofitInstance().create(APISchema.class);
 
         loginLayout = findViewById(R.id.loginPanel);
         signupLayout = findViewById(R.id.signupPanel);
@@ -206,17 +206,35 @@ public class Login extends BaseActivity {
         call.enqueue(new Callback<UserTokenResult>() {
             @Override
             public void onResponse(Call<UserTokenResult> call, Response<UserTokenResult> response) {
-                new Handler().post(() -> {
-                    startActivity(new Intent(Login.this, Main.class));
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finish();
-                });
+                if (response.code() != 200) {
+                    showDialogOK(R.layout.dialog_text, "Login failed", "Username and/or password is correct.", new Runnable() {
+                        @Override
+                        public void run() {
+                            loginButton.setVisibility(View.VISIBLE);
+                            progressLogin.setVisibility(View.GONE);
+                        }
+                    });
+                }
+                else {
+                    SharedPreferences sharedPreferences = getSharedPreferences("UFoodPref", MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                    assert response.body() != null;
+                    myEdit.putString("token", response.body().getToken());
+                    myEdit.apply();
+
+                    new Handler().post(() -> {
+                        startActivity(new Intent(Login.this, Main.class));
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    });
+                }
             }
 
             @Override
             public void onFailure(Call<UserTokenResult> call, Throwable t) {
                 call.cancel();
-                showDialogOK(R.layout.dialog_text, "Login failed", "Verify that username and password is correct or check your internet connection, then try again.", new Runnable() {
+                showDialogOK(R.layout.dialog_text, "Login failed", "Check your internet connection. If the problems persists, contact the developers.", new Runnable() {
                     @Override
                     public void run() {
                         loginButton.setVisibility(View.VISIBLE);
@@ -225,8 +243,6 @@ public class Login extends BaseActivity {
                 });
             }
         });
-
-
     }
 
     public void trySignup(View view) {

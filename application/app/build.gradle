@@ -5,7 +5,7 @@ android {
     compileSdkVersion 32
     defaultConfig {
         applicationId "vn.edu.usth.ufood"
-        minSdkVersion 21 // Lollipop
+        minSdkVersion 23 // Marshmallow
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28 // Oreo
         versionCode 1

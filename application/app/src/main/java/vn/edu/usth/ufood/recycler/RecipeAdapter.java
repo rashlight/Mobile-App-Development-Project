@@ -3,6 +3,8 @@ package vn.edu.usth.ufood.recycler;
 import android.content.Context;
 import android.net.Uri;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.MyViewHold
         holder.recipe.setText(itemRecipe.getRecipe());
         holder.price.setText(itemRecipe.getPrice());
         holder.ratingBar.setRating(itemRecipe.getRating());
+        Log.i("sdjfbsdhjfbjhsdbhf", String.valueOf(itemRecipe.getRating()));
         Glide.with(context)
                 .load(Uri.parse(itemRecipe.getImg()))
                 .transform(new CircleGlide())
